@@ -9,6 +9,7 @@ import { WebAppProvider } from "@/context/WebAppContext";
 import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
 import { StartParamHandler } from "@/components/tools/StartParamHandler";
+import {NextIntlClientProvider} from 'next-intl';
 
 const geistSans = Geist({
    variable: "--font-geist-sans",
@@ -43,6 +44,8 @@ export default function RootLayout({
             >
                <TelegramThemeProvider>
                   <WebAppProvider>
+                     <NextIntlClientProvider>
+
                      <Suspense fallback={null}>
                         <StartParamHandler />
                      </Suspense>
@@ -59,6 +62,7 @@ export default function RootLayout({
                         }}
                      />
                      <Footer />
+                           </NextIntlClientProvider>
                   </WebAppProvider>
                </TelegramThemeProvider>
             </ThemeProvider>
