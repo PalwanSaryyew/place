@@ -9,7 +9,7 @@ import { WebAppProvider } from "@/context/WebAppContext";
 import { Toaster } from "@/components/ui/sonner";
 import { Suspense } from "react";
 import { StartParamHandler } from "@/components/tools/StartParamHandler";
-import {NextIntlClientProvider} from 'next-intl';
+import { NextIntlClientProvider } from "next-intl";
 
 const geistSans = Geist({
    variable: "--font-geist-sans",
@@ -45,24 +45,23 @@ export default function RootLayout({
                <TelegramThemeProvider>
                   <WebAppProvider>
                      <NextIntlClientProvider>
+                        <Suspense fallback={null}>
+                           <StartParamHandler />
+                        </Suspense>
+                        <Header />
+                        <div className=""></div>
+                        <main className="py-26">{children}</main>
 
-                     <Suspense fallback={null}>
-                        <StartParamHandler />
-                     </Suspense>
-                     <Header />
-                     <div className=""></div>
-                     <main className="py-26">{children}</main>
-
-                     <Toaster
-                        position="top-center"
-                        toastOptions={{
-                           style: {
-                              marginTop: "70px",
-                           },
-                        }}
-                     />
-                     <Footer />
-                           </NextIntlClientProvider>
+                        <Toaster
+                           position="top-center"
+                           toastOptions={{
+                              style: {
+                                 marginTop: "70px",
+                              },
+                           }}
+                        />
+                        <Footer />
+                     </NextIntlClientProvider>
                   </WebAppProvider>
                </TelegramThemeProvider>
             </ThemeProvider>
