@@ -1,0 +1,15 @@
+{
+   "productDrawer": {
+      "buy": "Satyn al",
+      "comments": "Teswirler",
+      "share": {
+         "share": "Paýlaş",
+         "wait": "Garaşyň..."
+      },
+      "close": "Ýap"
+   },
+   "languageDialog": {
+      "title": "Dil saýlaň",
+      "explanation": "Isleg bildirýän diliňizi saýlaň."
+   }
+}

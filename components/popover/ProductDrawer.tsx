@@ -22,6 +22,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { MessageCircle, PanelBottomClose, Send } from "lucide-react";
 import { GiBuyCard } from "react-icons/gi";
+import { useTranslations } from "next-intl";
 
 // TWA Tip Tanımlamaları (shareMessage özelliğini ekliyoruz)
 const isTwaAvailable = (
@@ -58,6 +59,8 @@ export function ProductDrawer({
    const searchParams = useSearchParams();
 
    const isOpen = searchParams.get("product-id") === id;
+
+   const t = useTranslations("productDrawer");
 
    React.useEffect(() => {
       const initWebApp = async () => {
@@ -227,7 +230,7 @@ export function ProductDrawer({
                         className="w-full rounded-sm shadow-none border-none bg-popover hover:bg-secondary text-foreground"
                      >
                         <GiBuyCard />
-                        Satyn al
+                        {t("buy")}
                      </Button>
 
                      <Button
@@ -236,8 +239,8 @@ export function ProductDrawer({
                         disabled={isLoading && !isOpen}
                         className="w-full rounded-sm shadow-none border-none bg-popover hover:bg-secondary text-foreground"
                      >
-                        <MessageCircle/>
-                        Teswirler
+                        <MessageCircle />
+                        {t("comments")}
                      </Button>
 
                      <Button
@@ -246,8 +249,8 @@ export function ProductDrawer({
                         disabled={(isLoading && !isOpen) || isSharing}
                         className="w-full rounded-sm shadow-none border-none bg-popover hover:bg-secondary text-foreground"
                      >
-                        <Send/>
-                        {isSharing ? "Garaşyň..." : "Paýlaş"}
+                        <Send />
+                        {isSharing ? t("share.wait") : t("share.share")}
                      </Button>
 
                      <DrawerClose asChild>
@@ -255,8 +258,8 @@ export function ProductDrawer({
                            variant="secondary"
                            className="w-full rounded-sm shadow-none border-none bg-popover hover:bg-destructive hover:text-destructive-foreground text-foreground"
                         >
-                           <PanelBottomClose/>
-                           Ýap
+                           <PanelBottomClose />
+                           {t("close")}
                         </Button>
                      </DrawerClose>
                   </div>

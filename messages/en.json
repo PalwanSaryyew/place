@@ -1,5 +1,15 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
-  }
+   "productDrawer": {
+      "buy": "Buy",
+      "comments": "Comments",
+      "share": {
+         "share": "Share",
+         "wait": "Please wait..."
+      },
+      "close": "Close"
+   },
+   "languageDialog": {
+      "title": "Select Language",
+      "explanation": "Choose your preferred language."
+   }
 }
