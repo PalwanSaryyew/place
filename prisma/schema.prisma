@@ -63,6 +63,7 @@ model Transaction {
   id        String          @id @default(uuid())
   amount    Float
   type      TransactionType
+  status    TransactionStatus @default(PENDING)
   createdAt DateTime        @default(now())
   userId    String
   user      User            @relation(fields: [userId], references: [id])
@@ -71,4 +72,10 @@ model Transaction {
 enum TransactionType {
   DEPOSIT
   PURCHASE
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
 }

@@ -4,35 +4,36 @@ import prisma from "@/prisma/prismaConf";
 export async function POST(req: NextRequest) {
   try {
     // In a real application, you should validate the webhook signature here.
-    const { transactionId, status } = await req.json();
+    const { orderNo, status } = await req.json();
 
-    if (!transactionId || !status) {
+    if (!orderNo || !status) {
       return NextResponse.json(
-        { error: "Missing transactionId or status" },
+        { error: "Missing orderNo or status" },
         { status: 400 }
       );
     }
 
-    const transaction = await prisma.transaction.findUnique({
-      where: { id: transactionId },
-    });
-
-    if (!transaction) {
-      return NextResponse.json(
-        { error: "Transaction not found" },
-        { status: 404 }
-      );
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, userId, amountStr, timestamp] = orderNo.split("_");
+    const amount = parseFloat(amountStr);
 
     if (status === "completed") {
       // Update user's balance and transaction
       await prisma.$transaction(async (tx) => {
         await tx.user.update({
-          where: { id: transaction.userId },
+          where: { id: userId },
           data: {
             balance: {
-              increment: transaction.amount,
+              increment: amount,
             },
+          },
+        });
+        await tx.transaction.create({
+          data: {
+            id: orderNo,
+            userId: userId,
+            amount: amount,
+            type: "DEPOSIT",
           },
         });
       });

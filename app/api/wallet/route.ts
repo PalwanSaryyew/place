@@ -14,24 +14,36 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Invalid user data" }, { status: 401 });
     }
 
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const skip = (page - 1) * limit;
+
     const user = await prisma.user.findUnique({
       where: { id: String(userData.id) },
-      include: {
-        transactions: {
-          orderBy: {
-            createdAt: "desc",
-          },
-        },
-      },
     });
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    const transactions = await prisma.transaction.findMany({
+      where: { userId: String(userData.id) },
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip,
+      take: limit,
+    });
+
+    const totalTransactions = await prisma.transaction.count({
+      where: { userId: String(userData.id) },
+    });
+
     return NextResponse.json({
       balance: user.balance,
-      transactions: user.transactions,
+      transactions,
+      totalTransactions,
     });
   } catch (error) {
     console.error("Error fetching wallet data:", error);

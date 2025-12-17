@@ -20,34 +20,41 @@ const WalletPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isAddingBalance, setIsAddingBalance] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  const fetchWalletData = async (page: number) => {
+    try {
+      const response = await fetch(`/api/wallet?page=${page}&limit=10`, {
+        headers: {
+          initData: initData!,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch wallet data");
+      }
+
+      const data = await response.json();
+      setBalance(data.balance);
+      setTransactions((prev) => [...prev, ...data.transactions]);
+      setHasMore(data.transactions.length > 0);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (initData) {
-      const fetchWalletData = async () => {
-        try {
-          const response = await fetch("/api/wallet", {
-            headers: {
-              initData: initData,
-            },
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to fetch wallet data");
-          }
-
-          const data = await response.json();
-          setBalance(data.balance);
-          setTransactions(data.transactions);
-        } catch (error: unknown) {
-          setError(error instanceof Error ? error.message : "Unknown error");
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchWalletData();
+      fetchWalletData(page);
     }
-  }, [initData]);
+  }, [initData, page]);
+
+  const loadMore = () => {
+    setPage((prev) => prev + 1);
+  };
 
   const handleAddBalance = async () => {
     if (!initData) {
@@ -169,6 +176,10 @@ const WalletPage = () => {
               ))}
             </ul>
           </div>
+            <Button onClick={loadMore} disabled={!hasMore || loading}>
+              {loading ? "Loading..." : "Load More"}
+            </Button>
+          
         </CardContent>
         <CardFooter></CardFooter>
       </Card>

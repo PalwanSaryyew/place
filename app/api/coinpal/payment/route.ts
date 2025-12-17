@@ -38,23 +38,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const transaction = await prisma.transaction.create({
-      data: {
-        userId: String(userData.id),
-        amount: amount,
-        type: "DEPOSIT",
-      },
-    });
 
-    const requestId = crypto.randomUUID();
-    const orderNo = transaction.id;
+    const orderNo = `user_${userData.id}_${amount}_${Date.now()}`;
     const orderCurrency = "USD"; // Or any other currency
     const notifyURL = `${process.env.NEXT_PUBLIC_URL}/api/coinpal/webhook`;
     const redirectURL = `${process.env.NEXT_PUBLIC_URL}/wallet`;
 
     const signString =
       COINPAL_SECRET_KEY +
-      requestId +
       MERCHANT_NO +
       orderNo +
       String(amount) + // Ensure amount is a string for signature
@@ -63,7 +54,6 @@ export async function POST(req: NextRequest) {
 
     const formData = new URLSearchParams();
     formData.append("version", "2");
-    formData.append("requestId", requestId);
     formData.append("merchantNo", MERCHANT_NO);
     formData.append("orderNo", orderNo);
     formData.append("orderCurrencyType", "fiat");
