@@ -3,5 +3,5 @@
 import { cookies } from "next/headers";
 
 export async function changeLanguage(locale: string) {
-  cookies().set("NEXT_LOCALE", locale);
+  (await cookies()).set("NEXT_LOCALE", locale);
 }

@@ -8,8 +8,8 @@ import {
   LogOut,
   User,
   Settings,
-  Package,
   Globe,
+  Wallet,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -70,9 +70,9 @@ const Footer = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/myproducts" className="flex items-center gap-2">
-              <Package className="w-4 h-4" />
-              <span>My Products</span>
+            <Link href="/wallet" className="flex items-center gap-2">
+              <Wallet className="w-4 h-4" />
+              <span>Wallet</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
