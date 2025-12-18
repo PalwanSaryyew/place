@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createHash } from "crypto";
 import prisma from "@/prisma/prismaConf";
 
 export async function POST(req: NextRequest) {
@@ -14,6 +15,35 @@ export async function POST(req: NextRequest) {
     const formData = new URLSearchParams(bodyText);
     const orderNo = formData.get("orderNo");
     const status = formData.get("status");
+    const sign = formData.get("sign");
+
+    // --- Signature Validation ---
+    // NOTE: This validation logic is based on the signature generation for outgoing payments,
+    // as the webhook signature documentation is not available.
+    const COINPAL_SECRET_KEY = process.env.COINPAL_SECRET_KEY;
+    if (!COINPAL_SECRET_KEY) {
+      throw new Error("COINPAL_SECRET_KEY is not set for webhook validation");
+    }
+
+    const requestId = formData.get("requestId");
+    const merchantNo = formData.get("merchantNo");
+    const orderAmount = formData.get("orderAmount");
+    const orderCurrency = formData.get("orderCurrency");
+
+    const signString =
+      COINPAL_SECRET_KEY +
+      requestId +
+      merchantNo +
+      orderNo +
+      orderAmount +
+      orderCurrency;
+    const expectedSign = createHash("sha256").update(signString).digest("hex");
+
+    if (expectedSign !== sign) {
+      console.error("Webhook signature validation failed. Expected:", expectedSign, "Got:", sign);
+      return NextResponse.json({ error: "Invalid signature" }, { status: 403 });
+    }
+    // --- End of Signature Validation ---
 
     if (!orderNo || !status) {
       return NextResponse.json(
