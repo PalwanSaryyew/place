@@ -7,9 +7,23 @@ export async function POST(req: NextRequest) {
     console.log("CoinPal Webhook Headers:", JSON.stringify(Object.fromEntries(req.headers.entries())));
     console.log("CoinPal Webhook Body:", bodyText);
 
-    const formData = new URLSearchParams(bodyText);
-    const orderNo = formData.get("orderNo");
-    const status = formData.get("status");
+    // IMPORTANT: Webhook signature validation is not implemented.
+    // This is a security risk. Anyone could call this endpoint and credit a user's account.
+    // The signature is present in the body ('sign' parameter), but the method for calculating it
+    // on the server for verification is unknown without documentation.
+    // Try to read JSON first, otherwise fall back to form data.
+    let orderNo: string | null = null;
+    let status: string | null = null;
+
+    try {
+      const json = JSON.parse(bodyText);
+      orderNo = json.orderNo ?? null;
+      status = json.status ?? null;
+    } catch {
+      const formData = await req.formData();
+      orderNo = formData.get("orderNo") ? String(formData.get("orderNo")) : null;
+      status = formData.get("status") ? String(formData.get("status")) : null;
+    }
 
     if (!orderNo || !status) {
       return NextResponse.json(
@@ -19,10 +33,10 @@ export async function POST(req: NextRequest) {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, userId, amountStr, timestamp] = orderNo.split("_");
+    const [_, userId, amountStr, timestamp] = String(orderNo).split("_");
     const amount = parseFloat(amountStr);
 
-    if (status === "completed") {
+    if (status === "paid") {
       // Update user's balance and transaction
       await prisma.$transaction(async (tx) => {
         await tx.user.update({
