@@ -3,8 +3,12 @@ import prisma from "@/prisma/prismaConf";
 
 export async function POST(req: NextRequest) {
   try {
+    const body = await req.json();
+    console.log("CoinPal Webhook Headers:", JSON.stringify(Object.fromEntries(req.headers.entries())));
+    console.log("CoinPal Webhook Body:", JSON.stringify(body));
+
     // In a real application, you should validate the webhook signature here.
-    const { orderNo, status } = await req.json();
+    const { orderNo, status } = body;
 
     if (!orderNo || !status) {
       return NextResponse.json(
