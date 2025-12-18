@@ -11,19 +11,9 @@ export async function POST(req: NextRequest) {
     // This is a security risk. Anyone could call this endpoint and credit a user's account.
     // The signature is present in the body ('sign' parameter), but the method for calculating it
     // on the server for verification is unknown without documentation.
-    // Try to read JSON first, otherwise fall back to form data.
-    let orderNo: string | null = null;
-    let status: string | null = null;
-
-    try {
-      const json = JSON.parse(bodyText);
-      orderNo = json.orderNo ?? null;
-      status = json.status ?? null;
-    } catch {
-      const formData = await req.formData();
-      orderNo = formData.get("orderNo") ? String(formData.get("orderNo")) : null;
-      status = formData.get("status") ? String(formData.get("status")) : null;
-    }
+    const formData = new URLSearchParams(bodyText);
+    const orderNo = formData.get("orderNo");
+    const status = formData.get("status");
 
     if (!orderNo || !status) {
       return NextResponse.json(
