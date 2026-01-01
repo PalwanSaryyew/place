@@ -3,9 +3,9 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "@/lib/generated/prisma/client";
 import { INITIAL_LIMIT } from "@/lib/settings";
 import { toast } from "sonner";
+import { Product } from "@/generated/prisma/client";
 
 // Types expected by the API
 interface ProductData {

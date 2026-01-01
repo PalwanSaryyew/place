@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUserDataFromInitData } from "@/lib/auth";
 import crypto from "crypto";
-import prisma from "@/prisma/prismaConf";
+import { prisma } from "@/lib/prisma";
 
 const COINPAL_SECRET_KEY = process.env.COINPAL_SECRET_KEY;
 const COINPAL_API_URL = "https://pay.coinpal.io/gateway/pay/checkout";

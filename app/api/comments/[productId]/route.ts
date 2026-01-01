@@ -1,6 +1,6 @@
 // app/api/comments/[productId]/route.ts
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/prismaConf";
 
 /**
  * Belirli bir ürün ID'sine göre yorumları getirir.

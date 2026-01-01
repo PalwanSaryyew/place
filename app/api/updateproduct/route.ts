@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { rename, unlink, access, mkdir } from "fs/promises";
 import { constants } from "fs";
 import path from "path";
-import prisma from "@/prisma/prismaConf";
 import { getUserDataFromInitData, validateTelegramInitData } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 export const maxDuration = 3000;
 

@@ -1,7 +1,7 @@
 import { getUserDataFromInitData, validateTelegramInitData } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/prismaConf";
 import { deleteProduct, toggleProductStatus } from "@/actions/product-actions";
+import { prisma } from "@/lib/prisma";
 
 export async function DELETE(
    request: NextRequest,

@@ -1,6 +1,5 @@
 "use client";
 
-import { Product } from "@/lib/generated/prisma/client";
 import { ImagePlus, Loader2, Upload, X } from "lucide-react";
 import { useRouter }  from "next/navigation";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
@@ -12,6 +11,7 @@ import { Input } from "../ui/input";
 import { CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import { Product } from "@/generated/prisma/client";
 
 interface EditProductFormProps {
    product: Product;

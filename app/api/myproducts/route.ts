@@ -1,7 +1,7 @@
 // /app/api/myproducts/route.ts
 import { getUserDataFromInitData, validateTelegramInitData } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/prismaConf";
 
 // Promise'e zaman aşımı ekleyen yardımcı fonksiyon
 function withTimeout<T>(

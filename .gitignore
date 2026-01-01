@@ -46,3 +46,5 @@ next-env.d.ts
 /uploads/
 /temp/
 /generated/prisma
+
+/generated/prisma

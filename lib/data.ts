@@ -1,8 +1,8 @@
 // lib/data.ts
 
-import prisma from "@/prisma/prismaConf";
-import { Product } from "@/lib/generated/prisma/client";
 import { unstable_noStore as noStore } from 'next/cache'; // 👈 Bu satırı ekleyin
+import { prisma } from './prisma';
+import { Product } from '@/generated/prisma/client';
 
 // API rotanızdaki tüm mantığı buraya taşıyın.
 export async function getProducts({

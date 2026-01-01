@@ -28,11 +28,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { useWebApp } from "@/context/WebAppContext";
-import { Product } from "@/lib/generated/prisma/client";
+
 import { ProductDrawer } from "../popover/ProductDrawer";
 import { CommentsDrawer } from "../popover/CommentsDrawer"; // CommentsDrawer'ı içe aktar
 import { cn } from "@/lib/utils";
 import { EditProduct } from "./EditProduct";
+import { Product } from "@/generated/prisma/client";
 
 // ... (other code) ...
 

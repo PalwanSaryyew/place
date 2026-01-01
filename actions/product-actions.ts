@@ -1,7 +1,7 @@
 // actions/product-actions.ts
 "use server";
 
-import prisma from "@/prisma/prismaConf";
+import { prisma } from "@/lib/prisma";
 import fs from "fs/promises";
 import path from "path";
 

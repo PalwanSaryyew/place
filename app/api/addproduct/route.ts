@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { rename, access, mkdir } from "fs/promises";
 import { constants } from "fs";
 import path from "path";
-import prisma from "@/prisma/prismaConf";
+import { prisma } from "@/lib/prisma";
 
 export const maxDuration = 3000;
 

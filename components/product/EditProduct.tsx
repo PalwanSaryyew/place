@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/drawer";
 import EditProductForm from "@/components/forms/EditProductForm";
 import { Edit } from "lucide-react";
-import { Product } from "@/lib/generated/prisma/client";
+import { Product } from "@/generated/prisma/client";
 
 interface EditProductProps {
     product: Product;

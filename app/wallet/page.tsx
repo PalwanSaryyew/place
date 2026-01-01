@@ -10,10 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useWebApp } from "@/context/WebAppContext";
-import { Transaction } from "@/lib/generated/prisma/client";
 import { useCallback, useEffect, useState } from "react";
 
 import { AddBalanceDialog } from "@/components/forms/AddBalanceDialog";
+import { Transaction } from "@/generated/prisma/client";
 
 
 
