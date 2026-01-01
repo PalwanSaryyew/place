@@ -17,6 +17,8 @@
       "amount": "Amount",
       "commission": "Commission",
       "total_amount": "Total Amount",
-      "pay": "Pay"
+      "pay": "Pay",
+      "pay_success": "Pay (Success)",
+      "pay_fail": "Pay (Fail)"
    }
 }

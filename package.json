@@ -25,7 +25,6 @@
       "@twa-dev/sdk": "^8.0.2",
       "class-variance-authority": "^0.7.1",
       "clsx": "^2.1.1",
-      "coinpal-sdk": "^2.0.0",
       "dotenv": "^17.2.3",
       "embla-carousel-react": "^8.6.0",
       "lucide-react": "^0.545.0",

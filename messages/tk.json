@@ -17,6 +17,8 @@
       "amount": "Mukdar",
       "commission": "Komissiýa",
       "total_amount": "Jemi Mukdar",
-      "pay": "Töle"
+      "pay": "Töle",
+      "pay_success": "Töle (üstünlikli)",
+      "pay_fail": "Töle (şowsuz)"
    }
 }

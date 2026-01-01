@@ -28,7 +28,7 @@ export function AddBalanceDialog() {
     return amount + (amount * commission) / 100;
   }, [amount]);
 
-  const handlePayment = async () => {
+  const handlePayment = async (status: "success" | "fail") => {
     if (!initData) {
       setError("Telegram user data not available. Please try again later.");
       return;
@@ -43,13 +43,13 @@ export function AddBalanceDialog() {
     setError(null);
 
     try {
-      const response = await fetch("/api/coinpal/payment", {
+      const response = await fetch("/api/cryptomus/payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           initData: initData,
         },
-        body: JSON.stringify({ amount: totalAmount }),
+        body: JSON.stringify({ amount: totalAmount, status }),
       });
 
       const data = await response.json();
@@ -58,11 +58,10 @@ export function AddBalanceDialog() {
         throw new Error(data.error || "Failed to create payment");
       }
 
-      if (data.paymentUrl && data.transactionId) {
+      if (data.paymentUrl) {
         webApp?.openLink(data.paymentUrl);
-        router.push(`/wallet/${data.transactionId}`);
       } else {
-        throw new Error("Payment URL or Transaction ID not found in response.");
+        throw new Error("Payment URL not found in response.");
       }
     } catch (error: unknown) {
       const errorMessage =
@@ -106,9 +105,22 @@ export function AddBalanceDialog() {
           </div>
           {error && <div className="text-red-500 text-sm">{error}</div>}
         </div>
-        <Button onClick={handlePayment} disabled={loading}>
-          {loading ? "Processing..." : t("pay")}
-        </Button>
+        <div className="flex justify-end gap-2">
+          <Button
+            onClick={() => handlePayment("success")}
+            disabled={loading}
+            variant="success"
+          >
+            {loading ? "Processing..." : t("pay_success")}
+          </Button>
+          <Button
+            onClick={() => handlePayment("fail")}
+            disabled={loading}
+            variant="destructive"
+          >
+            {loading ? "Processing..." : t("pay_fail")}
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -14,15 +14,14 @@ datasource db {
 }
 
 model User {
-  id           String    @id @unique
+  id           String        @id @unique
   firstName    String
   lastName     String?
-  username     String?   @unique
+  username     String?       @unique
   languageCode String?
   lastActivity DateTime
-  balance      Float     @default(0.0)
+  balance      Float         @default(0.0)
   transactions Transaction[]
-
 
   // İlişkiler
   products Product[] // Kullanıcının sattığı ürünler
@@ -64,18 +63,19 @@ model Comment {
 }
 
 model Transaction {
-  id        String          @id @default(uuid())
+  id        String            @id @default(uuid())
   amount    Float
   type      TransactionType
   status    TransactionStatus @default(PENDING)
-  createdAt DateTime        @default(now())
+  createdAt DateTime          @default(now())
   userId    String
-  user      User            @relation(fields: [userId], references: [id])
+  user      User              @relation(fields: [userId], references: [id])
 }
 
 enum TransactionType {
   DEPOSIT
   PURCHASE
+  TRANSFER
 }
 
 enum TransactionStatus {
@@ -83,4 +83,3 @@ enum TransactionStatus {
   COMPLETED
   FAILED
 }
-
