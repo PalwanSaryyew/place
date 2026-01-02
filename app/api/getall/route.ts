@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { INITIAL_LIMIT } from "@/lib/settings";
 import { prisma } from "@/lib/prisma";
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
    // 1. Get the 'limit' and 'page' parameters from the URL
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
 
    try {
       const products = await prisma.product.findMany({
-         where: { isPublished: true },
+         where: { status: "AVAILABLE" },
          // Sayfalama için 'skip' ve 'take' kullan
          skip: skip,
          take: take,

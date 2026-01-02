@@ -8,21 +8,11 @@ import { Loader2, AlertTriangle } from "lucide-react";
 import { MyProductCard } from "@/components/product/my-product-card";
 
 // Ürün tipi (Prisma modelinize göre ayarlayın)
-interface Product {
-   id: string;
-   title: string;
-   description: string;
-   images: string[];
-   isPublished: boolean;
-   price: number;
-   createdAt: Date;
-   updatedAt: Date;
-   userId: string;
-}
+import { Product } from "@/generated/prisma/client";
 
 export default function MyProductsPage() {
    // Güncellenmiş context'ten hem webApp hem de initData'yı al
-   const { initData } = useWebApp(); 
+   const { initData } = useWebApp();
    const [products, setProducts] = useState<Product[]>([]);
    // isLoading başlangıçta false olabilir, çünkü initData'nın gelmesini bekleyeceğiz
    const [isLoading, setIsLoading] = useState(true);
@@ -60,7 +50,8 @@ export default function MyProductsPage() {
                );
             }
          } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : String(err);
+            const errorMessage =
+               err instanceof Error ? err.message : String(err);
             console.error("Fetch hatası:", errorMessage);
             setError(`Ağ hatası: ${errorMessage}`);
          } finally {
@@ -69,7 +60,6 @@ export default function MyProductsPage() {
       };
 
       fetchProducts();
-      
    }, [initData]); // useEffect artık sadece ve sadece initData'ya bağımlı
 
    return (

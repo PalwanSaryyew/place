@@ -114,7 +114,7 @@ export default function InfiniteProductList({
             {products.map((product) => (
                <ProductCard
                   key={product.id}
-                  id={product.id}
+                  id={product.id.toString()}
                   name={product.title}
                   description={product.description}
                   price={product.price}

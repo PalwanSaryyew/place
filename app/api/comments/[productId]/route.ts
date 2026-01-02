@@ -24,7 +24,7 @@ export async function GET(
 
       const comments = await prisma.comment.findMany({
          where: {
-            productId: productId,
+            productId: parseInt(productId),
          },
          include: {
             user: {

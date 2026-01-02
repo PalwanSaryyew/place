@@ -46,7 +46,7 @@ export async function DELETE(
       }
 
       const product = await prisma.product.findUnique({
-         where: { id: productId },
+         where: { id: parseInt(productId) },
          select: { userId: true },
       });
 
@@ -128,7 +128,7 @@ export async function PATCH(
       }
 
       const product = await prisma.product.findUnique({
-         where: { id: productId },
+         where: { id: parseInt(productId) },
          select: { userId: true },
       });
 

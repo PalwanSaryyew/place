@@ -24,52 +24,112 @@ model User {
   transactions Transaction[]
 
   // İlişkiler
-  products Product[] // Kullanıcının sattığı ürünler
-  comments Comment[] // Kullanıcının yaptığı yorumlar
+  products      Product[] // Kullanıcının sattığı ürünler
+  comments      Comment[] // Kullanıcının yaptığı yorumlar
+  purchases     Order[] // Kullanıcının satın aldığı siparişler
+  notifications Notification[] @relation("recipient")
+}
+
+model Category {
+  id   Int    @id @unique @default(autoincrement())
+  name String
+
+  // Kendi kendine ilişki
+  parentId Int?
+  parent   Category?  @relation("SubCategories", fields: [parentId], references: [id])
+  children Category[] @relation("SubCategories")
+
+  // İlişkiler
+  products Product[]
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          Int      @id @unique @default(autoincrement())
   title       String
   description String
   images      String[]
-  isPublished Boolean  @default(true)
   price       Float    @default(0.0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // Satıcı İlişkisi
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  // Kategori ve Özellikler
+  attributes Json
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 
-  // Yorum İlişkisi
+  // Pazaryeri Alanları
+  status     ProductStatus @default(DRAFT)
+  stock      Int           @default(1)
+  viewCount  Int           @default(0)
+  salesCount Int           @default(0)
+
+  // İlişkiler
+  userId   String
+  user     User      @relation(fields: [userId], references: [id])
   comments Comment[] // Ürüne yapılan yorumlar
+  orders   Order[] // Bu ürüne verilen siparişler
 }
 
 model Comment {
-  id        String   @id @default(uuid())
-  text      String // Yorum metni
-  rating    Int? // 1-5 arası puan (İsteğe bağlı, boş bırakılabilir)
+  id        Int      @id @unique @default(autoincrement())
+  text      String
+  rating    Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Hangi ürüne yapıldı?
-  productId String
+  // İlişkiler
+  productId Int
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  // Kim yaptı?
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Transaction {
-  id        String            @id @default(uuid())
+  id        Int               @id @unique @default(autoincrement())
   amount    Float
   type      TransactionType
   status    TransactionStatus @default(PENDING)
   createdAt DateTime          @default(now())
-  userId    String
-  user      User              @relation(fields: [userId], references: [id])
+
+  // İlişkiler
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  orderId Int?   @unique // Bu transaction bir siparişe ait olabilir
+  order   Order? @relation(fields: [orderId], references: [id])
+}
+
+model Order {
+  id         Int         @id @unique @default(autoincrement())
+  totalPrice Float // Sipariş anındaki toplam fiyat
+  quantity   Int         @default(1)
+  createdAt  DateTime    @default(now())
+  status     OrderStatus @default(PENDING)
+
+  // İlişkiler
+  buyerId     String
+  buyer       User         @relation(fields: [buyerId], references: [id])
+  productId   Int
+  product     Product      @relation(fields: [productId], references: [id])
+  transaction Transaction? // Bu siparişe bağlı tekil transaction
+}
+
+model Notification {
+  id        Int              @id @unique @default(autoincrement())
+  message   String
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  type      NotificationType
+  link      String? // Bildirime tıklandığında gidilecek URL
+
+  // İlişkiler
+  recipientId String
+  recipient   User   @relation("recipient", fields: [recipientId], references: [id])
+}
+
+enum ProductStatus {
+  AVAILABLE
+  SOLD
+  DRAFT
 }
 
 enum TransactionType {
@@ -82,4 +142,19 @@ enum TransactionStatus {
   PENDING
   COMPLETED
   FAILED
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+enum NotificationType {
+  NEW_SALE
+  NEW_COMMENT
+  STATUS_UPDATE
+  WALLET_DEPOSIT
+  GENERAL_INFO
 }

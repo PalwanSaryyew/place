@@ -1,4 +1,4 @@
-// components/product/my-product-card.tsx 
+// components/product/my-product-card.tsx
 "use client";
 
 import { useState } from "react"; // <-- State'i ekle
@@ -78,7 +78,9 @@ export function MyProductCard({ product }: MyProductCardProps) {
 
    // Yerel State'ler (Anlık tepki için)
    const [isDeleted, setIsDeleted] = useState(false); // Kart silindi mi?
-   const [isPublished, setIsPublished] = useState(product.isPublished); // Yayın durumu
+   const [isPublished, setIsPublished] = useState(
+      product.status === "AVAILABLE"
+   ); // Yayın durumu
    const [isLoading, setIsLoading] = useState(false); // İşlem sürüyor mu?
 
    // Eğer silindiyse, bileşeni hiç render etme (DOM'dan kaldır)
@@ -178,8 +180,6 @@ export function MyProductCard({ product }: MyProductCardProps) {
             <p className="text-sm text-muted-foreground">{product.price} TMT</p>
          </CardHeader>
 
-
-
          <CardFooter className="flex gap-2 pt-4">
             <EditProduct product={product} disabled={isLoading} />
 
@@ -194,7 +194,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
 
                   <DropdownMenuItem asChild>
                      <ProductDrawer
-                        id={product.id}
+                        id={product.id.toString()}
                         name={product.title}
                         description={product.description}
                         price={product.price}
@@ -215,7 +215,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                      asChild
                   >
                      <CommentsDrawerTrigger
-                        productId={product.id}
+                        productId={product.id.toString()}
                         productName={product.title}
                      >
                         <MessageSquare className="w-4 h-4 mr-2" /> Teswirler

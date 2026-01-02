@@ -30,8 +30,7 @@ export async function POST(req: NextRequest) {
 
     // The 'amount' from the client is the net amount the user wants to add.
     // We calculate the gross amount to charge, including commission, for the payment provider.
-    const commissionRate = 1; // 1%
-    const grossAmount = amount + (amount * commissionRate) / 100;
+    
     // In a real payment gateway, `grossAmount` would be used.
 
     // The transaction in our DB stores the net amount to be credited to the user.
@@ -53,6 +52,7 @@ export async function POST(req: NextRequest) {
       paymentUrl: mockPaymentUrl,
       transactionId: transaction.id,
     });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error creating payment:", error);
     return NextResponse.json(

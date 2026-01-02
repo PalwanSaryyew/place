@@ -11,8 +11,8 @@ export async function toggleProductStatus(
 ) {
    try {
       await prisma.product.update({
-         where: { id: productId },
-         data: { isPublished: !currentStatus },
+         where: { id: parseInt(productId) },
+         data: { status: currentStatus ? "DRAFT" : "AVAILABLE" },
       });
       return { success: true };
    } catch (error) {
@@ -24,7 +24,7 @@ export async function toggleProductStatus(
 export async function deleteProduct(productId: string) {
    try {
       const product = await prisma.product.findUnique({
-         where: { id: productId },
+         where: { id: parseInt(productId) },
          select: { images: true },
       });
 
@@ -47,7 +47,7 @@ export async function deleteProduct(productId: string) {
       }
 
       await prisma.product.delete({
-         where: { id: productId },
+         where: { id: parseInt(productId) },
       });
       return { success: true };
    } catch (error) {
