@@ -28,9 +28,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
+    // The 'amount' from the client is the net amount the user wants to add.
+    // We calculate the gross amount to charge, including commission, for the payment provider.
+    const commissionRate = 1; // 1%
+    const grossAmount = amount + (amount * commissionRate) / 100;
+    // In a real payment gateway, `grossAmount` would be used.
+
+    // The transaction in our DB stores the net amount to be credited to the user.
     const transaction = await prisma.transaction.create({
       data: {
-        amount,
+        amount, // Storing the net amount
         type: "DEPOSIT",
         status: "PENDING",
         userId: userData.id.toString(),

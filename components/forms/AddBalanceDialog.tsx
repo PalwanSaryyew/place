@@ -49,7 +49,7 @@ export function AddBalanceDialog() {
           "Content-Type": "application/json",
           initData: initData,
         },
-        body: JSON.stringify({ amount: totalAmount, status }),
+        body: JSON.stringify({ amount: amount, status }),
       });
 
       const data = await response.json();
