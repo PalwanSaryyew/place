@@ -46,13 +46,14 @@ export function ProductDrawer({
    description,
    price,
    imageUrls,
+   attributes,
 }: ProductCardProps & {
    children: React.ReactNode;
 }) {
    const [webApp, setWebApp] = React.useState<WebApp | undefined>();
    const [isLoading, setIsLoading] = React.useState(false);
-   const [isSharing, setIsSharing] = React.useState(false); 
-   const [isCommentsOpen, setIsCommentsOpen] = React.useState(false); 
+   const [isSharing, setIsSharing] = React.useState(false);
+   const [isCommentsOpen, setIsCommentsOpen] = React.useState(false);
 
    const router = useRouter();
    const pathname = usePathname();
@@ -168,7 +169,7 @@ export function ProductDrawer({
       }
 
       return () => {
-         if(webApp && webApp.BackButton) {
+         if (webApp && webApp.BackButton) {
             webApp.BackButton.offClick(handleTwaBack);
          }
       };
@@ -187,6 +188,28 @@ export function ProductDrawer({
       </div>
    );
 
+   const AttributesSection = ({ attributes }: { attributes: any }) => {
+      if (!attributes || Object.keys(attributes).length === 0) {
+         return null;
+      }
+
+      return (
+         <div className="mt-4 pt-4 border-t">
+            <h3 className="text-lg font-semibold mb-2 text-left">
+               {t("attributes")}
+            </h3>
+            <div className="grid grid-cols-2 gap-2 text-left">
+               {Object.entries(attributes).map(([key, value]) => (
+                  <React.Fragment key={key}>
+                     <div className="font-medium text-sm">{key}</div>
+                     <div className="text-sm">{String(value)}</div>
+                  </React.Fragment>
+               ))}
+            </div>
+         </div>
+      );
+   };
+
    const DrawerRealContent = () => (
       <div className="flex-1 overflow-y-auto px-4">
          <div className="flex justify-center pt-4">
@@ -204,6 +227,7 @@ export function ProductDrawer({
             <DrawerDescription className="mt-2 text-base text-left leading-relaxed">
                {description}
             </DrawerDescription>
+            <AttributesSection attributes={attributes} />
          </DrawerHeader>
       </div>
    );

@@ -119,6 +119,7 @@ export default function InfiniteProductList({
                   description={product.description}
                   price={product.price}
                   imageUrls={product.images}
+                  attributes={product.attributes}
                />
             ))}
          </div>

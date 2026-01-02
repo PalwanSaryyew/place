@@ -15,6 +15,7 @@ export interface ProductCardProps {
    description: string;
    price: number;
    imageUrls: string[];
+   attributes: any;
 }
 
 export default function ProductCard({
@@ -23,6 +24,7 @@ export default function ProductCard({
    description,
    price,
    imageUrls,
+   attributes,
 }: ProductCardProps) {
    return (
       <ProductDrawer
@@ -31,6 +33,7 @@ export default function ProductCard({
          description={description}
          price={price}
          imageUrls={imageUrls}
+         attributes={attributes}
       >
          <Card className="w-full overflow-hidden pt-0 pb-4 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl">
             <CardHeader className="p-0">
