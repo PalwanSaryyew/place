@@ -166,9 +166,9 @@ export default function AddProductForm() {
       if (!subCategory) return null;
 
       switch (subCategory.name) {
-         case 'PUBG Account':
+         case 'PUBG Accounts':
             return <PubgAccountFields />;
-         case 'Telegram NFT Gift':
+         case 'Telegram NFT Gifts':
             return <TelegramNftGiftFields />;
          default:
             return null;
