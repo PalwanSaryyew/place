@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { ProductDrawer } from "../popover/ProductDrawer";
+import { JsonValue } from "@/generated/prisma/internal/prismaNamespace";
 
 export interface ProductCardProps {
    id: string;
@@ -15,7 +16,7 @@ export interface ProductCardProps {
    description: string;
    price: number;
    imageUrls: string[];
-   attributes: any;
+   attributes: JsonValue;
 }
 
 export default function ProductCard({

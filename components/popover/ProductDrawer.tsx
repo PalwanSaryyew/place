@@ -23,6 +23,7 @@ import * as React from "react";
 import { MessageCircle, PanelBottomClose, Send } from "lucide-react";
 import { GiBuyCard } from "react-icons/gi";
 import { useTranslations } from "next-intl";
+import { JsonValue } from "@/generated/prisma/internal/prismaNamespace";
 
 // TWA Tip Tanımlamaları (shareMessage özelliğini ekliyoruz)
 const isTwaAvailable = (
@@ -188,7 +189,7 @@ export function ProductDrawer({
       </div>
    );
 
-   const AttributesSection = ({ attributes }: { attributes: any }) => {
+   const AttributesSection = ({ attributes }: { attributes: JsonValue }) => {
       if (!attributes || Object.keys(attributes).length === 0) {
          return null;
       }

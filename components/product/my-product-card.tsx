@@ -199,6 +199,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                         description={product.description}
                         price={product.price}
                         imageUrls={product.images}
+                        attributes={product.attributes}
                      >
                         <span
                            className={cn(
