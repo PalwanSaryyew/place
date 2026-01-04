@@ -1,0 +1,17 @@
+{
+   "name": "@nexuz/bot",
+   "version": "0.1.0",
+   "private": true,
+   "scripts": {
+      "start": "ts-node index.ts"
+   },
+   "dependencies": {
+      "@nexuz/shared": "workspace:*",
+      "grammy": "^1.39.2",
+      "dotenv": "^17.2.3"
+   },
+   "devDependencies": {
+      "ts-node": "^10.9.2",
+      "typescript": "^5"
+   }
+}

@@ -1,0 +1,25 @@
+{
+   "productDrawer": {
+      "buy": "Satyn al",
+      "comments": "Teswirler",
+      "attributes": "Aýratynlyklar",
+      "share": {
+         "share": "Paýlaş",
+         "wait": "Garaşyň..."
+      },
+      "close": "Ýap"
+   },
+   "languageDialog": {
+      "title": "Dil saýlaň",
+      "explanation": "Isleg bildirýän diliňizi saýlaň."
+   },
+   "wallet": {
+      "add_balance": "Balansy artdyr",
+      "amount": "Mukdar",
+      "commission": "Komissiýa",
+      "total_amount": "Jemi Mukdar",
+      "pay": "Töle",
+      "pay_success": "Töle (üstünlikli)",
+      "pay_fail": "Töle (şowsuz)"
+   }
+}

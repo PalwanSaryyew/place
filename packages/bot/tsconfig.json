@@ -1,0 +1,27 @@
+{
+   "compilerOptions": {
+      "target": "ES2017",
+      "lib": ["esnext"],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "noEmit": true,
+      "esModuleInterop": true,
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "incremental": true,
+      "paths": {
+         "@/lib/*": ["../shared/lib/*"],
+         "@/prisma/*": ["../shared/prisma/*"],
+         "@/messages/*": ["../shared/messages/*"],
+         "@/i18n/*": ["../shared/i18n/*"],
+         "@/utils/*": ["../shared/utils/*"],
+         "@/context/*": ["../shared/context/*"],
+         "@/actions/*": ["../shared/actions/*"]
+      }
+   },
+   "include": ["**/*.ts"],
+   "exclude": ["node_modules"]
+}

@@ -1,0 +1,25 @@
+{
+   "productDrawer": {
+      "buy": "Buy",
+      "comments": "Comments",
+      "attributes": "Attributes",
+      "share": {
+         "share": "Share",
+         "wait": "Please wait..."
+      },
+      "close": "Close"
+   },
+   "languageDialog": {
+      "title": "Select Language",
+      "explanation": "Choose your preferred language."
+   },
+   "wallet": {
+      "add_balance": "Add Balance",
+      "amount": "Amount",
+      "commission": "Commission",
+      "total_amount": "Total Amount",
+      "pay": "Pay",
+      "pay_success": "Pay (Success)",
+      "pay_fail": "Pay (Fail)"
+   }
+}
