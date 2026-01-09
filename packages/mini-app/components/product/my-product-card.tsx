@@ -4,6 +4,7 @@
 import { useState } from "react"; // <-- State'i ekle
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import {
    // ... diğer ikonlar ...
    MoreHorizontal,
@@ -73,6 +74,7 @@ interface MyProductCardProps {
 }
 
 export function MyProductCard({ product }: MyProductCardProps) {
+   const t = useTranslations("myProductCard");
    const router = useRouter();
    const { initData } = useWebApp();
 
@@ -104,24 +106,24 @@ export function MyProductCard({ product }: MyProductCardProps) {
 
          if (response.ok && result.success) {
             toast.success(
-               newStatus ? "Önüm satyşa çykaryldy" : "Önüm Satyşdan aýryldy"
+               newStatus ? t("product_published") : t("product_unpublished")
             );
             router.refresh();
          } else {
             // Hata olursa eski haline döndür
             setIsPublished(!newStatus);
-            toast.error(result.error || "Statusy täzeläp bolmady");
+            toast.error(result.error || t("status_update_failed"));
          }
       } catch {
          setIsPublished(!newStatus);
-         toast.error("Statusy täzeläp bolmady");
+         toast.error(t("status_update_failed"));
       } finally {
          setIsLoading(false);
       }
    };
 
    const handleDelete = async () => {
-      const confirmDelete = confirm("Çyndanam önümi pozmakçymy?");
+      const confirmDelete = confirm(t("confirm_delete"));
       if (!confirmDelete) return;
 
       setIsLoading(true);
@@ -138,13 +140,13 @@ export function MyProductCard({ product }: MyProductCardProps) {
          if (response.ok && result.success) {
             // 2. Başarılıysa kartı hemen yok et
             setIsDeleted(true);
-            toast.success("Önüm pozuldy");
+            toast.success(t("product_deleted"));
             router.refresh(); // Arka planda yine de veriyi tazele
          } else {
-            toast.error(result.error || "Önümi pozmakda ýalňyşlyk ýüze çykdy");
+            toast.error(result.error || t("delete_failed"));
          }
       } catch {
-         toast.error("Ýalňyşlyk ýüze çykdy");
+         toast.error(t("error_occurred"));
       } finally {
          setIsLoading(false);
       }
@@ -166,7 +168,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
             <div className="absolute top-2 right-2">
                {/* State'teki isPublished değerini kullanıyoruz */}
                <Badge variant={isPublished ? "default" : "secondary"}>
-                  {isPublished ? "Satyşda" : "Satyşda däl"}
+                  {isPublished ? t("on_sale") : t("not_on_sale")}
                </Badge>
             </div>
          </div>
@@ -177,7 +179,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                   {product.title}
                </h3>
             </div>
-            <p className="text-sm text-muted-foreground">{product.price} TMT</p>
+            <p className="text-sm text-muted-foreground">{product.price} {t("currency")}</p>
          </CardHeader>
 
          <CardFooter className="flex gap-2 pt-4">
@@ -190,7 +192,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                   </Button>
                </DropdownMenuTrigger>
                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Amallar</DropdownMenuLabel>
+                  <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
 
                   <DropdownMenuItem asChild>
                      <ProductDrawer
@@ -206,7 +208,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                               "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                            )}
                         >
-                           <Eye className="w-4 h-4 mr-2" /> Synla
+                           <Eye className="w-4 h-4 mr-2" /> {t("preview")}
                         </span>
                      </ProductDrawer>
                   </DropdownMenuItem>
@@ -219,7 +221,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                         productId={product.id.toString()}
                         productName={product.title}
                      >
-                        <MessageSquare className="w-4 h-4 mr-2" /> Teswirler
+                        <MessageSquare className="w-4 h-4 mr-2" /> {t("comments")}
                      </CommentsDrawerTrigger>
                   </DropdownMenuItem>
 
@@ -231,12 +233,11 @@ export function MyProductCard({ product }: MyProductCardProps) {
                   >
                      {isPublished ? (
                         <>
-                           <PauseCircle className="w-4 h-4 mr-2" /> Satyşdan
-                           aýyr
+                           <PauseCircle className="w-4 h-4 mr-2" /> {t("unpublish")}
                         </>
                      ) : (
                         <>
-                           <PlayCircle className="w-4 h-4 mr-2" /> Satyşa çykar
+                           <PlayCircle className="w-4 h-4 mr-2" /> {t("publish")}
                         </>
                      )}
                   </DropdownMenuItem>
@@ -250,7 +251,7 @@ export function MyProductCard({ product }: MyProductCardProps) {
                      ) : (
                         <Trash className="w-4 h-4 mr-2" />
                      )}
-                     Poz
+                     {t("delete")}
                   </DropdownMenuItem>
                </DropdownMenuContent>
             </DropdownMenu>

@@ -71,12 +71,12 @@ export function ProductDrawer({
                const app = await Webapp();
                setWebApp(app);
             } catch (e) {
-               console.error("TWA yüklenemedi", e);
+               console.error(t("twa_loading_error"), e);
             }
          }
       };
       initWebApp();
-   }, []);
+   }, [t]);
 
    React.useEffect(() => {
       if (isOpen) {
@@ -108,14 +108,14 @@ export function ProductDrawer({
 
    const handleSmartShare = async () => {
       if (!webApp || !isTwaAvailable(webApp)) {
-         alert("Bu özellik sadece Telegram içinde çalışır.");
+         alert(t("telegram_only_feature"));
          return;
       }
 
       const userId = webApp.initDataUnsafe?.user?.id;
 
       if (!userId) {
-         alert("Kullanıcı bilgisi alınamadı.");
+         alert(t("user_info_not_found"));
          return;
       }
 
@@ -136,7 +136,7 @@ export function ProductDrawer({
          });
 
          if (!response.ok) {
-            throw new Error("API Error");
+            throw new Error(t("api_error"));
          }
 
          const data = await response.json();
@@ -144,14 +144,14 @@ export function ProductDrawer({
          if (data.preparedMessageId) {
             webApp.shareMessage(data.preparedMessageId, (result) => {
                if (result) {
-                  console.log("Mesaj başarıyla paylaşıldı!");
+                  console.log(t("message_shared_successfully"));
                }
             });
          } else {
-            console.error("Mesaj ID alınamadı");
+            console.error(t("message_id_not_found"));
          }
       } catch (error) {
-         console.error("Paylaşım hatası:", error);
+         console.error(t("share_error"), error);
       } finally {
          setIsSharing(false);
       }
@@ -222,7 +222,7 @@ export function ProductDrawer({
             </DrawerTitle>
             <div className="text-left mt-2">
                <Badge variant={"secondary"} className="text-sm">
-                  {price} TMT
+                  {price} {t("currency")}
                </Badge>
             </div>
             <DrawerDescription className="mt-2 text-base text-left leading-relaxed">

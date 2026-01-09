@@ -33,8 +33,10 @@ export function LanguageSwitcher({ children }: { children: React.ReactNode }) {
                <DialogDescription>{t("explanation")}</DialogDescription>
             </DialogHeader>
             <div className="flex flex-col gap-2">
-               <Button onClick={() => changeLanguage("en")}>English</Button>
-               <Button onClick={() => changeLanguage("tk")}>Türkmen</Button>
+               <Button onClick={() => changeLanguage("en")}>{t("english")}</Button>
+               <Button onClick={() => changeLanguage("tk")}>{t("turkmen")}</Button>
+               <Button onClick={() => changeLanguage("ru")}>{t("russian")}</Button>
+               <Button onClick={() => changeLanguage("tr")}>{t("turkish")}</Button>
             </div>
          </DialogContent>
       </Dialog>

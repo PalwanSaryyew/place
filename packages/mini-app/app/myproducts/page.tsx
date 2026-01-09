@@ -3,6 +3,7 @@
 import { useWebApp } from "@/context/WebAppContext";
 import { useEffect, useState } from "react";
 
+import { useTranslations } from "next-intl";
 import { Loader2, AlertTriangle } from "lucide-react";
 
 import { MyProductCard } from "@/components/product/my-product-card";
@@ -11,6 +12,7 @@ import { MyProductCard } from "@/components/product/my-product-card";
 import { Product } from "@/generated/prisma/client";
 
 export default function MyProductsPage() {
+   const t = useTranslations("myProductsPage");
    // Güncellenmiş context'ten hem webApp hem de initData'yı al
    const { initData } = useWebApp();
    const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +33,7 @@ export default function MyProductsPage() {
          setIsLoading(true);
          setError(null);
          try {
-            console.log("API'ye gönderilen initData:", initData);
+            console.log(t("init_data_sent_to_api"), initData);
             const response = await fetch("/api/myproducts", {
                method: "POST",
                headers: {
@@ -46,38 +48,38 @@ export default function MyProductsPage() {
             } else {
                const errorData = await response.json();
                setError(
-                  errorData.error || "Ürünler yüklenirken bir hata oluştu."
+                  errorData.error || t("error_loading_products")
                );
             }
          } catch (err) {
             const errorMessage =
                err instanceof Error ? err.message : String(err);
-            console.error("Fetch hatası:", errorMessage);
-            setError(`Ağ hatası: ${errorMessage}`);
+            console.error(t("fetch_error"), errorMessage);
+            setError(`${t("network_error")}: ${errorMessage}`);
          } finally {
             setIsLoading(false);
          }
       };
 
       fetchProducts();
-   }, [initData]); // useEffect artık sadece ve sadece initData'ya bağımlı
+   }, [initData, t]); // useEffect artık sadece ve sadece initData'ya bağımlı
 
    return (
       <div className="p-4 max-w-2xl mx-auto">
-         <h1 className="text-2xl font-bold mb-6">Meniň Satlyk Hasaplarym</h1>
+         <h1 className="text-2xl font-bold mb-6">{t("my_accounts_for_sale")}</h1>
 
          {/* Yükleme ve Hata Durumları */}
          {isLoading && (
             <div className="flex justify-center items-center h-40">
                <Loader2 className="w-6 h-6 animate-spin mr-2" />
-               <p>Önümler ýüklenýär...</p>
+               <p>{t("loading_products")}</p>
             </div>
          )}
 
          {error && (
             <div className="flex items-center p-4 rounded-lg bg-red-100 text-red-800">
                <AlertTriangle className="w-5 h-5 mr-2" />
-               <p>Error: {error}</p>
+               <p>{t("error")}: {error}</p>
             </div>
          )}
 
@@ -92,8 +94,7 @@ export default function MyProductsPage() {
                </div>
             ) : (
                <p className="text-center text-gray-500 mt-10">
-                  Hiç hili satlyk hasap tapylmady. Täze hasap goşmak üçin Goş
-                  düwmesine basyň.
+                  {t("no_accounts_for_sale")}
                </p>
             ))}
       </div>

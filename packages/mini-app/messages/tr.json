@@ -1,0 +1,202 @@
+{
+   "productDrawer": {
+      "buy": "Satın Al",
+      "comments": "Yorumlar",
+      "attributes": "Özellikler",
+      "share": {
+         "share": "Paylaş",
+         "wait": "Lütfen bekle..."
+      },
+      "close": "Kapat",
+      "twa_loading_error": "TWA yüklenemedi",
+      "telegram_only_feature": "Bu özellik sadece Telegram içinde çalışır.",
+      "user_info_not_found": "Kullanıcı bilgisi alınamadı.",
+      "api_error": "API Hatası",
+      "message_shared_successfully": "Mesaj başarıyla paylaşıldı!",
+      "message_id_not_found": "Mesaj ID'si bulunamadı",
+      "share_error": "Paylaşım hatası:",
+      "currency": "USDT"
+   },
+   "languageDialog": {
+      "title": "Dil Seçin",
+      "explanation": "Tercih ettiğiniz dili seçin.",
+      "english": "İngilizce",
+      "turkmen": "Türkmence",
+      "russian": "Rusça",
+      "turkish": "Türkçe"
+   },
+   "wallet": {
+      "add_balance": "Bakiye Ekle",
+      "amount": "Tutar",
+      "commission": "Komisyon",
+      "total_amount": "Toplam Tutar",
+      "pay": "Öde",
+      "pay_success": "Öde (Başarılı)",
+      "pay_fail": "Öde (Başarısız)",
+      "telegram_user_data_not_available": "Telegram kullanıcı verileri mevcut değil. Lütfen daha sonra tekrar deneyin.",
+      "please_enter_a_valid_amount": "Lütfen geçerli bir tutar girin.",
+      "failed_to_create_payment": "Ödeme oluşturulamadı",
+      "payment_url_not_found_in_response": "YanÄ±tta ödeme URL'si bulunamadÄ±.",
+      "an_unknown_error_occurred": "Bilinmeyen bir hata oluştu.",
+      "error_adding_balance": "Bakiye eklenirken hata oluştu:",
+      "usdt": "USDT",
+      "processing": "İşleniyor..."
+   },
+   "attributes":{
+      "pubg_account":{
+         "game_id": "Oyun Kimliği",
+         "account_level": "Hesap Seviyesi",
+         "collection_level": "Koleksiyon Seviyesi",
+         "upgradeable_weapons": "Yükseltilebilir Silahlar",
+         "ultimate_suits": "Ultimate Giysiler",
+         "upgradeable_vehicles": "Yükseltilebilir Araçlar",
+         "brand_vehicles": "Marka Araçlar",
+         "sports_cars": "Spor Arabalar",
+         "royale_pass": "Açılan Royale Pass'ler",
+         "companions_count": "Yoldaş Sayısı"
+      },
+      "telegram_nft_gift": {
+         "nft_collection": "NFT Koleksiyonu",
+         "nft_collection_placeholder": "örneğin, Nadir kullanıcı adları",
+         "validity": "Geçerlilik",
+         "validity_placeholder": "örneğin, 1 yıl"
+      }
+   },
+   "footer": {
+      "profile": "Profil",
+      "wallet": "Cüzdan",
+      "change_language": "Dili değiştir",
+      "english": "İngilizce",
+      "turkmen": "Türkmence",
+      "russian": "Rusça",
+      "turkish": "Türkçe",
+      "settings": "Ayarlar",
+      "log_out": "Çıkış Yap"
+   },
+   "addProductForm": {
+      "failed_to_fetch_categories": "Kategoriler getirilemedi",
+      "failed_to_load_categories": "Kategoriler yüklenemedi",
+      "max_6_images": "En fazla 6 resim yükleyebilirsiniz.",
+      "image_upload_failed": "Resim yüklenemedi",
+      "image_upload_error": "Resim yüklenirken bir hata oluştu.",
+      "select_category_warning": "Lütfen bir kategori seçin.",
+      "submitting_data": "Veri gönderiliyor...",
+      "product_added_successfully": "Ürün başarıyla eklendi!",
+      "error": "Hata",
+      "something_went_wrong": "Bir şeyler yanlış gitti",
+      "network_error": "Ağ hatası.",
+      "add_product": "Ürün Ekle",
+      "add_product_description": "Ürününüzü satışa çıkarmak için bilgileri girin ve resimleri yükleyin.",
+      "main_category": "Ana Kategori",
+      "select_category": "Bir kategori seçin",
+      "sub_category": "Alt Kategori",
+      "select_sub_category": "Bir alt kategori seçin",
+      "short_title": "Kısa Başlık",
+      "less_than_20_chars": "20 karakterden az",
+      "price_in_usdt": "Fiyat (USDT)",
+      "enter_price": "Fiyatı girin",
+      "preview": "Önizleme",
+      "main": "Ana",
+      "upload_images": "Resim Yükle",
+      "at_least_one_image": "En az 1 resim gereklidir.",
+      "uploading": "Yükleniyor...",
+      "select": "Seç",
+      "detailed_description": "Detaylı Açıklama",
+      "enter_additional_info": "Ek bilgileri buraya girin...",
+      "submitting": "Gönderiliyor...",
+      "submit": "Gönder",
+      "pubg_accounts": "PUBG Hesapları",
+      "telegram_nft_gifts": "Telegram NFT Hediyeleri"
+   },
+   "editProductForm": {
+      "max_6_images": "En fazla 6 resim yükleyebilirsiniz.",
+      "image_upload_failed": "Resim yüklenemedi",
+      "image_upload_error": "Resim yüklenirken bir hata oluştu.",
+      "updating_data": "Veri güncelleniyor...",
+      "product_updated_successfully": "Ürün başarıyla güncellendi!",
+      "error": "Hata",
+      "something_went_wrong": "Bir şeyler yanlış gitti",
+      "network_error": "Ağ hatası.",
+      "product_information": "Ürün Bilgileri",
+      "edit_account_information": "Hesap bilgilerini düzenle.",
+      "short_title": "Kısa Başlık",
+      "price_in_tmt": "Fiyat (USDT)",
+      "previous_image": "Önceki Resim",
+      "new_image": "Yeni Resim",
+      "select_images": "Resim Seç",
+      "at_least_one_image": "En az 1 resim gereklidir.",
+      "uploading": "Yükleniyor...",
+      "add_image": "Resim Ekle",
+      "detailed_description": "Detaylı Açıklama",
+      "updating": "Güncelleniyor...",
+      "update": "Güncelle"
+   },
+   "commentsDrawer": {
+      "comments_could_not_be_loaded": "Yorumlar yüklenemedi.",
+      "telegram_app_required_for_comment": "Yorum gönderebilmek için Telegram uygulaması gereklidir.",
+      "comment_could_not_be_sent": "Yorum gönderilemedi.",
+      "no_comments_yet": "Henüz yorum yok. İlk sen ol!",
+      "comments": "Yorumlar",
+      "comments_for_product": "{productName} için yapılan yorumlar",
+      "write_your_comment": "Yorumunuzu yazın..."
+   },
+   "testDrawer": {
+      "open": "Açık",
+      "are_you_sure": "Kesinlikle emin misin?",
+      "this_action_cannot_be_undone": "Bu işlem geri alınamaz.",
+      "submit": "Gönder",
+      "cancel": "İptal"
+   },
+   "editProduct": {
+      "edit": "Düzenle",
+      "edit_product": "Ürünü Düzenle",
+      "you_can_update_the_information": "Bilgileri güncelleyebilirsiniz.",
+      "cancel": "İptal"
+   },
+   "fullScreenImageViewer": {
+      "alt_text": "Tam ekran"
+   },
+   "infiniteProductList": {
+      "error_loading_products_1": "Ürünler yüklenirken hata oluştu. (1)",
+      "data_extraction_error": "Veri çıkarma hatası:",
+      "error_loading_products_2": "Ürünler yüklenirken hata oluştu. (2)",
+      "loading_notifications": "Bildirimler yükleniyor...",
+      "loading_more": "Daha fazla yükleniyor...",
+      "finished": "Bitti!",
+      "no_notifications": "Bildirim yok."
+   },
+   "myProductCard": {
+      "product_published": "Ürün yayına alındı",
+      "product_unpublished": "Ürün yayından kaldırıldı",
+      "status_update_failed": "Durum güncellenemedi",
+      "confirm_delete": "Ürünü silmek istediğinizden emin misiniz?",
+      "product_deleted": "Ürün silindi",
+      "delete_failed": "Ürün silinemedi",
+      "error_occurred": "Bir hata oluştu",
+      "on_sale": "Satışta",
+      "not_on_sale": "Satışta değil",
+      "currency": "USDT",
+      "actions": "İşlemler",
+      "preview": "Önizleme",
+      "comments": "Yorumlar",
+      "unpublish": "Yayından Kaldır",
+      "publish": "Yayınla",
+      "delete": "Sil"
+   },
+   "productCard": {
+      "currency": "USDT"
+   },
+   "productPhotosCarousel": {
+      "alt_text": "Ürün Fotoğrafı"
+   },
+   "myProductsPage": {
+      "init_data_sent_to_api": "API'ye gönderilen initData:",
+      "error_loading_products": "Ürünler yüklenirken bir hata oluştu.",
+      "fetch_error": "Getirme hatası:",
+      "network_error": "Ağ hatası",
+      "my_accounts_for_sale": "Satılık Hesaplarım",
+      "loading_products": "Ürünler yükleniyor...",
+      "error": "Hata",
+      "no_accounts_for_sale": "Satılık hesap bulunamadı. Yeni bir hesap eklemek için Ekle düğmesine tıklayın."
+   }
+}

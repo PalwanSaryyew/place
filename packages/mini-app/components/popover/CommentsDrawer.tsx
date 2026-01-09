@@ -1,6 +1,3 @@
-// components/popover/CommentsDrawer.tsx
-"use client";
-
 import * as React from "react";
 import {
    Drawer,
@@ -14,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RiTelegram2Fill } from "react-icons/ri";
+import { useTranslations } from "next-intl";
 import { useWebApp } from "@/context/WebAppContext";
 
 // Gelen yorumlar için tip tanımı
@@ -40,6 +38,7 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
    isOpen,
    onOpenChange,
 }) => {
+   const t = useTranslations("commentsDrawer");
    const { initData } = useWebApp();
    const [comments, setComments] = React.useState<CommentWithUser[]>([]);
    const [isLoadingComments, setIsLoadingComments] = React.useState(false);
@@ -58,19 +57,19 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
             const response = await fetch(`/api/comments/${productId}`);
             if (!response.ok) {
                const errorData = await response.json();
-               throw new Error(errorData.error || "Yorumlar yüklenemedi.");
+               throw new Error(errorData.error || t("comments_could_not_be_loaded"));
             }
             const data = await response.json();
             setComments(data);
          } catch (err: Error | unknown) {
-            setError(err instanceof Error ? err.message : "Yorumlar yüklenemedi.");
+            setError(err instanceof Error ? err.message : t("comments_could_not_be_loaded"));
          } finally {
             setIsLoadingComments(false);
          }
       };
 
       fetchComments();
-   }, [isOpen, productId]);
+   }, [isOpen, productId, t]);
 
    const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -81,7 +80,7 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
       if (!commentText.trim()) return;
 
       if (!initData) {
-         setSubmitError("Yorum gönderebilmek için Telegram uygulaması gereklidir.");
+         setSubmitError(t("telegram_app_required_for_comment"));
          return;
       }
 
@@ -101,14 +100,14 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
 		 
          if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.error || "Yorum gönderilemedi.");
+            throw new Error(errorData.error || t("comment_could_not_be_sent"));
          }
 
          const newComment = await response.json();
          setComments((prevComments) => [newComment, ...prevComments]);
          form.reset();
       } catch (err: Error | unknown) {
-         setSubmitError(err instanceof Error ? err.message : "Yorum gönderilemedi.");
+         setSubmitError(err instanceof Error ? err.message : t("comment_could_not_be_sent"));
       } finally {
          setIsSubmitting(false);
       }
@@ -133,7 +132,7 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
       }
 
       if (comments.length === 0) {
-         return <div className="text-center text-muted-foreground">Heniz teswir ýok. Birinji bol!</div>;
+         return <div className="text-center text-muted-foreground">{t("no_comments_yet")}</div>;
       }
 
       return comments.map((comment) => (
@@ -150,8 +149,8 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
       <Drawer open={isOpen} onOpenChange={onOpenChange}>
          <DrawerContent className="!h-[50dvh] flex flex-col focus:outline-none">
             <DrawerHeader>
-               <DrawerTitle>Teswirler ({!isLoadingComments && !error ? comments.length : "..."})</DrawerTitle>
-               <DrawerDescription>{productName} harydy üçin edilen teswirler.</DrawerDescription>
+               <DrawerTitle>{t("comments")} ({!isLoadingComments && !error ? comments.length : "..."})</DrawerTitle>
+               <DrawerDescription>{t("comments_for_product", { productName })}</DrawerDescription>
             </DrawerHeader>
             <div className="flex-1 overflow-y-auto px-4 space-y-4">{renderContent()}</div>
             <DrawerFooter className="mt-auto pt-4">
@@ -160,7 +159,7 @@ export const CommentsDrawer: React.FC<CommentsDrawerProps> = ({
                      <Input
                         className="!bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0"
                         name="comment"
-                        placeholder="Teswiriňizi ýazyň..."
+                        placeholder={t("write_your_comment")}
                         autoComplete="off"
                         disabled={isSubmitting}
                      />

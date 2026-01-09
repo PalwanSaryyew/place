@@ -35,6 +35,7 @@ import { changeLanguage } from "../../../actions/language-actions";
 
 const Footer = () => {
   const t = useTranslations("languageDialog");
+  const f = useTranslations("footer");
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleLanguageChange = (locale: string) => {
@@ -66,13 +67,13 @@ const Footer = () => {
           <DropdownMenuItem asChild>
             <Link href="/profile" className="flex items-center gap-2">
               <User className="w-4 h-4" />
-              <span>Profile</span>
+              <span>{f("profile")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/wallet" className="flex items-center gap-2">
               <Wallet className="w-4 h-4" />
-              <span>Wallet</span>
+              <span>{f("wallet")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -86,7 +87,7 @@ const Footer = () => {
                 className="flex items-center gap-2"
               >
                 <Globe className="w-4 h-4" />
-                <span>Change language</span>
+                <span>{f("change_language")}</span>
               </DropdownMenuItem>
             </DialogTrigger>
             <DialogContent>
@@ -96,10 +97,16 @@ const Footer = () => {
               </DialogHeader>
               <div className="flex flex-col gap-2">
                 <Button onClick={() => handleLanguageChange("en")}>
-                  English
+                  {f("english")}
                 </Button>
                 <Button onClick={() => handleLanguageChange("tk")}>
-                  Türkmen
+                  {f("turkmen")}
+                </Button>
+                <Button onClick={() => handleLanguageChange("ru")}>
+                  {f("russian")}
+                </Button>
+                <Button onClick={() => handleLanguageChange("tr")}>
+                  {f("turkish")}
                 </Button>
               </div>
             </DialogContent>
@@ -107,13 +114,13 @@ const Footer = () => {
           <DropdownMenuItem asChild>
             <Link href="/settings" className="flex items-center gap-2">
               <Settings className="w-4 h-4" />
-              <span>Settings</span>
+              <span>{f("settings")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="flex items-center gap-2">
             <LogOut className="w-4 h-4" />
-            <span>Log out</span>
+            <span>{f("log_out")}</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

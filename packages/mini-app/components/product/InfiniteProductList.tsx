@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import ProductCard from "./ProductCard";
 import { INITIAL_LIMIT } from "@/lib/settings";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Product } from "@/generated/prisma/client";
 
@@ -24,6 +25,7 @@ export default function InfiniteProductList({
    initialProducts,
    apiUrl,
 }: InfiniteProductListProps) {
+   const t = useTranslations("infiniteProductList");
    const [products, setProducts] = useState<Product[]>(initialProducts);
    const [page, setPage] = useState(2); // Initially page is 1 loaded, next page is 2
    const [hasMore, setHasMore] = useState(
@@ -46,7 +48,7 @@ export default function InfiniteProductList({
          );
 
          if (!response.ok) {
-            toast.error("Önümleri ýüklemekde ýalňyşlyk ýüze çykdy. (1)");
+            toast.error(t("error_loading_products_1"));
             setIsLoading(false);
             return;
          }
@@ -61,12 +63,12 @@ export default function InfiniteProductList({
             setHasMore(false);
          }
       } catch (error) {
-         console.error("Data extraction error:", error);
-         toast.error("Önümleri ýüklemekde ýalňyşlyk ýüze çykdy. (2)");
+         console.error(t("data_extraction_error"), error);
+         toast.error(t("error_loading_products_2"));
       } finally {
          setIsLoading(false);
       }
-   }, [apiUrl, page, hasMore, isLoading]); // We add dependencies.
+   }, [apiUrl, page, hasMore, isLoading, t]); // We add dependencies.
 
    // Set up Intersection Observer
    useEffect(() => {
@@ -129,24 +131,24 @@ export default function InfiniteProductList({
             <div ref={loaderRef} className="col-span-full py-6 text-center">
                {isLoading ? (
                   <p className="text-blue-500 font-semibold">
-                     Bildirişler yüklenyär...
+                     {t("loading_notifications")}
                   </p>
                ) : (
                   // LoaderRef is attached to this div. When the user sees this field, new data will be pulled..
-                  <p className="text-gray-400">Dowamy ýüklenyär.</p>
+                  <p className="text-gray-400">{t("loading_more")}</p>
                )}
             </div>
          )}
 
          {!hasMore && products.length > 0 && (
             <div className="col-span-full py-10 text-center text-gray-500">
-               Gutardy!
+               {t("finished")}
             </div>
          )}
 
          {products.length === 0 && (
             <div className="col-span-full text-center py-10 text-xl text-gray-500">
-               Bildiriş ýok.
+               {t("no_notifications")}
             </div>
          )}
       </>

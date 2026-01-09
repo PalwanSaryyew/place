@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { ProductDrawer } from "../popover/ProductDrawer";
 import { JsonValue } from "@/generated/prisma/internal/prismaNamespace";
+import { useTranslations } from "next-intl";
 
 export interface ProductCardProps {
    id: string;
@@ -27,6 +28,7 @@ export default function ProductCard({
    imageUrls,
    attributes,
 }: ProductCardProps) {
+   const t = useTranslations("productCard");
    return (
       <ProductDrawer
          id={id}
@@ -57,7 +59,7 @@ export default function ProductCard({
                </CardDescription>
             </CardContent>
             <CardFooter className="text-lg px-4 md:text-2xl font-extrabold text-primary">
-               {price} TMT
+               {price} {t("currency")}
             </CardFooter>
          </Card>
       </ProductDrawer>

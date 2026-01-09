@@ -69,7 +69,7 @@ export async function POST(request: Request) {
         id: productId,
         photo_url: finalImageUrl, // Artık tam URL
         thumb_url: finalImageUrl,
-        caption: `<b>${title}</b>\n<u>${price} TMT</u>\n<blockquote expandable>${safeDescription}</blockquote>`,
+        caption: `<b>${title}</b>\n<u>${price} USDT</u>\n<blockquote expandable>${safeDescription}</blockquote>`,
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [

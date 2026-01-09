@@ -13,6 +13,7 @@ import {
 import EditProductForm from "@/components/forms/EditProductForm";
 import { Edit } from "lucide-react";
 import { Product } from "@/generated/prisma/client";
+import { useTranslations } from "next-intl";
 
 interface EditProductProps {
     product: Product;
@@ -20,6 +21,7 @@ interface EditProductProps {
 }
 
 export function EditProduct({ product, disabled }: EditProductProps) {
+    const t = useTranslations("editProduct");
     const [isOpen, setIsOpen] = useState(false);
 
     const handleSuccess = () => {
@@ -35,14 +37,14 @@ export function EditProduct({ product, disabled }: EditProductProps) {
                 disabled={disabled}
             >
                 <Edit className="w-4 h-4 mr-2" />
-                Düzediş
+                {t("edit")}
             </Button>
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
                 <DrawerContent className="max-h-[90dvh]">
                     <DrawerHeader>
-                        <DrawerTitle>Önümi Düzediň: {product.title}</DrawerTitle>
+                        <DrawerTitle>{t("edit_product")}: {product.title}</DrawerTitle>
                         <DrawerDescription>
-                            Maglumatlary täzeläp bilersiňiz.
+                            {t("you_can_update_the_information")}
                         </DrawerDescription>
                     </DrawerHeader>
                     <div className="p-4 overflow-y-auto">
@@ -50,7 +52,7 @@ export function EditProduct({ product, disabled }: EditProductProps) {
                     </div>
                     <DrawerFooter className="pt-2">
                         <DrawerClose asChild>
-                            <Button variant="outline">Bes et</Button>
+                            <Button variant="outline">{t("cancel")}</Button>
                         </DrawerClose>
                     </DrawerFooter>
                 </DrawerContent>

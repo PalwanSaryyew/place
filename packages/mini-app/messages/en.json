@@ -7,11 +7,23 @@
          "share": "Share",
          "wait": "Please wait..."
       },
-      "close": "Close"
+      "close": "Close",
+      "twa_loading_error": "TWA could not be loaded",
+      "telegram_only_feature": "This feature only works inside Telegram.",
+      "user_info_not_found": "User information could not be retrieved.",
+      "api_error": "API Error",
+      "message_shared_successfully": "Message shared successfully!",
+      "message_id_not_found": "Message ID not found",
+      "share_error": "Sharing error:",
+      "currency": "USDT"
    },
    "languageDialog": {
       "title": "Select Language",
-      "explanation": "Choose your preferred language."
+      "explanation": "Choose your preferred language.",
+      "english": "English",
+      "turkmen": "Turkmen",
+      "russian": "Russian",
+      "turkish": "Turkish"
    },
    "wallet": {
       "add_balance": "Add Balance",
@@ -20,7 +32,15 @@
       "total_amount": "Total Amount",
       "pay": "Pay",
       "pay_success": "Pay (Success)",
-      "pay_fail": "Pay (Fail)"
+      "pay_fail": "Pay (Fail)",
+      "telegram_user_data_not_available": "Telegram user data not available. Please try again later.",
+      "please_enter_a_valid_amount": "Please enter a valid amount.",
+      "failed_to_create_payment": "Failed to create payment",
+      "payment_url_not_found_in_response": "Payment URL not found in response.",
+      "an_unknown_error_occurred": "An unknown error occurred.",
+      "error_adding_balance": "Error adding balance:",
+      "usdt": "USDT",
+      "processing": "Processing..."
    },
    "attributes":{
       "pubg_account":{
@@ -34,6 +54,149 @@
          "sports_cars": "Sports Cars",
          "royale_pass": "Royal Passes Opened",
          "companions_count": "Companions Count"
+      },
+      "telegram_nft_gift": {
+         "nft_collection": "NFT Collection",
+         "nft_collection_placeholder": "e.g., Rare usernames",
+         "validity": "Validity",
+         "validity_placeholder": "e.g., 1 year"
       }
+   },
+   "footer": {
+      "profile": "Profile",
+      "wallet": "Wallet",
+      "change_language": "Change language",
+      "english": "English",
+      "turkmen": "Turkmen",
+      "russian": "Russian",
+      "turkish": "Turkish",
+      "settings": "Settings",
+      "log_out": "Log out"
+   },
+   "addProductForm": {
+      "failed_to_fetch_categories": "Failed to fetch categories",
+      "failed_to_load_categories": "Failed to load categories",
+      "max_6_images": "You can upload a maximum of 6 images.",
+      "image_upload_failed": "Image upload failed",
+      "image_upload_error": "An error occurred while uploading the image.",
+      "select_category_warning": "Please select a category.",
+      "submitting_data": "Submitting data...",
+      "product_added_successfully": "Product added successfully!",
+      "error": "Error",
+      "something_went_wrong": "Something went wrong",
+      "network_error": "Network error.",
+      "add_product": "Add Product",
+      "add_product_description": "Enter the information to list your item for sale and upload images.",
+      "main_category": "Main Category",
+      "select_category": "Select a category",
+      "sub_category": "Sub Category",
+      "select_sub_category": "Select a sub category",
+      "short_title": "Short Title",
+      "less_than_20_chars": "Less than 20 characters",
+      "price_in_usdt": "Price (USDT)",
+      "enter_price": "Enter the price",
+      "preview": "Preview",
+      "main": "Main",
+      "upload_images": "Upload Images",
+      "at_least_one_image": "At least 1 image is required.",
+      "uploading": "Uploading...",
+      "select": "Select",
+      "detailed_description": "Detailed Description",
+      "enter_additional_info": "Enter additional information here...",
+      "submitting": "Submitting...",
+      "submit": "Submit",
+      "pubg_accounts": "PUBG Accounts",
+      "telegram_nft_gifts": "Telegram NFT Gifts"
+   },
+   "editProductForm": {
+      "max_6_images": "You can upload a maximum of 6 images.",
+      "image_upload_failed": "Image upload failed",
+      "image_upload_error": "An error occurred while uploading the image.",
+      "updating_data": "Updating data...",
+      "product_updated_successfully": "Product updated successfully!",
+      "error": "Error",
+      "something_went_wrong": "Something went wrong",
+      "network_error": "Network error.",
+      "product_information": "Product Information",
+      "edit_account_information": "Edit the account information.",
+      "short_title": "Short Title",
+      "price_in_tmt": "Price (USDT)",
+      "previous_image": "Previous Image",
+      "new_image": "New Image",
+      "select_images": "Select Images",
+      "at_least_one_image": "At least 1 image is required.",
+      "uploading": "Uploading...",
+      "add_image": "Add Image",
+      "detailed_description": "Detailed Description",
+      "updating": "Updating...",
+      "update": "Update"
+   },
+   "commentsDrawer": {
+      "comments_could_not_be_loaded": "Comments could not be loaded.",
+      "telegram_app_required_for_comment": "Telegram application is required to send comments.",
+      "comment_could_not_be_sent": "Comment could not be sent.",
+      "no_comments_yet": "No comments yet. Be the first!",
+      "comments": "Comments",
+      "comments_for_product": "Comments for {productName}",
+      "write_your_comment": "Write your comment..."
+   },
+   "testDrawer": {
+      "open": "Open",
+      "are_you_sure": "Are you absolutely sure?",
+      "this_action_cannot_be_undone": "This action cannot be undone.",
+      "submit": "Submit",
+      "cancel": "Cancel"
+   },
+   "editProduct": {
+      "edit": "Edit",
+      "edit_product": "Edit Product",
+      "you_can_update_the_information": "You can update the information.",
+      "cancel": "Cancel"
+   },
+   "fullScreenImageViewer": {
+      "alt_text": "Full-screen"
+   },
+   "infiniteProductList": {
+      "error_loading_products_1": "Error loading products. (1)",
+      "data_extraction_error": "Data extraction error:",
+      "error_loading_products_2": "Error loading products. (2)",
+      "loading_notifications": "Loading notifications...",
+      "loading_more": "Loading more...",
+      "finished": "Finished!",
+      "no_notifications": "No notifications."
+   },
+   "myProductCard": {
+      "product_published": "Product has been published",
+      "product_unpublished": "Product has been unpublished",
+      "status_update_failed": "Failed to update status",
+      "confirm_delete": "Are you sure you want to delete the product?",
+      "product_deleted": "Product deleted",
+      "delete_failed": "Failed to delete product",
+      "error_occurred": "An error occurred",
+      "on_sale": "On sale",
+      "not_on_sale": "Not on sale",
+      "currency": "USDT",
+      "actions": "Actions",
+      "preview": "Preview",
+      "comments": "Comments",
+      "unpublish": "Unpublish",
+      "publish": "Publish",
+      "delete": "Delete"
+   },
+   "productCard": {
+      "currency": "USDT"
+   },
+   "productPhotosCarousel": {
+      "alt_text": "Product Photo"
+   },
+   "myProductsPage": {
+      "init_data_sent_to_api": "initData sent to API:",
+      "error_loading_products": "An error occurred while loading the products.",
+      "fetch_error": "Fetch error:",
+      "network_error": "Network error",
+      "my_accounts_for_sale": "My Accounts for Sale",
+      "loading_products": "Loading products...",
+      "error": "Error",
+      "no_accounts_for_sale": "No accounts for sale found. Click the Add button to add a new account."
    }
 }

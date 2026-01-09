@@ -1,6 +1,7 @@
 // components/product/FullScreenImageViewer.tsx
 import Image from "next/image";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 interface FullScreenImageViewerProps {
    imageUrls: string[];
@@ -15,6 +16,7 @@ const FullScreenImageViewer: React.FC<FullScreenImageViewerProps> = ({
    onClose,
    onNavigate,
 }) => {
+   const t = useTranslations("fullScreenImageViewer");
    const handlePrev = () => {
       if (currentImageIndex > 0) {
          onNavigate(currentImageIndex - 1);
@@ -38,7 +40,7 @@ const FullScreenImageViewer: React.FC<FullScreenImageViewerProps> = ({
          >
             <Image
                src={imageUrls[currentImageIndex]}
-               alt="Full-screen"
+               alt={t("alt_text")}
                fill
                className="object-contain"
             />

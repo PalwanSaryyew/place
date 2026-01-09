@@ -15,6 +15,7 @@ import { ImagePlus, Loader2, Upload, X } from "lucide-react";
 import { useRef, useState, ChangeEvent, FormEvent, useEffect } from "react";
 import Image from "next/image";
 import { useWebApp } from "@/context/WebAppContext";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
@@ -29,6 +30,7 @@ interface Category {
 }
 
 export default function AddProductForm() {
+   const t = useTranslations("addProductForm");
    const webApp = useWebApp();
    const router = useRouter();
    const fileInputRef = useRef<HTMLInputElement>(null);
@@ -46,23 +48,23 @@ export default function AddProductForm() {
          try {
             const response = await fetch('/api/categories');
             if (!response.ok) {
-               throw new Error('Failed to fetch categories');
+               throw new Error(t("failed_to_fetch_categories"));
             }
             const data = await response.json();
             setCategories(data);
          } catch (error) {
             console.error(error);
-            toast.error("Kategoriýalary ýükläp bolmady.");
+            toast.error(t("failed_to_load_categories"));
          }
       };
       fetchCategories();
-   }, []);
+   }, [t]);
 
    const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(event.target.files || []);
       if (files.length === 0) return;
       if (tempImageUrls.length + files.length > 6) {
-         toast.error("Iň köp 6 surat ýükläp bilersiňiz.");
+         toast.error(t("max_6_images"));
          return;
       }
       setIsUploading(true);
@@ -74,7 +76,7 @@ export default function AddProductForm() {
             body: formData,
          });
          if (!response.ok) {
-            throw new Error("Surat ýüklenmedi");
+            throw new Error(t("image_upload_failed"));
          }
          const { uploadedFileNames } = await response.json();
          const newUrls = uploadedFileNames.map(
@@ -83,7 +85,7 @@ export default function AddProductForm() {
          setTempImageUrls((prev) => [...prev, ...newUrls]);
       } catch (error) {
          console.error(error);
-         toast.error("Surat ýüklemekde ýalňyşlyk ýüze çykdy.");
+         toast.error(t("image_upload_error"));
       } finally {
          setIsUploading(false);
          if (fileInputRef.current) {
@@ -104,12 +106,12 @@ export default function AddProductForm() {
    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isSubmitting || tempImageUrls.length === 0 || !selectedSubCategory) {
-          toast.warning("Kategoriýa saýlanyň.")
+          toast.warning(t("select_category_warning"));
          return
       };
 
       setIsSubmitting(true);
-      toast.info("Maglumatlar ugradylýar...");
+      toast.info(t("submitting_data"));
 
       const form = event.currentTarget;
       const formData = new FormData(form);
@@ -152,15 +154,15 @@ export default function AddProductForm() {
          });
 
          if (response.ok) {
-            toast.success("Önüm üstünlikli goşuldy!");
+            toast.success(t("product_added_successfully"));
             router.push("/myproducts");
          } else {
             const error = await response.json();
-            toast.error(`Ýalňyşlyk: ${error.error || "Näsazlyk"}`);
+            toast.error(`${t("error")}: ${error.error || t("something_went_wrong")}`);
          }
       } catch (error) {
          console.log(error);
-         toast.error("Tor ýalňyşlygy.");
+         toast.error(t("network_error"));
       } finally {
          setIsSubmitting(false);
       }
@@ -191,23 +193,23 @@ export default function AddProductForm() {
          <form onSubmit={handleSubmit}>
             <FieldGroup>
                <FieldSet>
-                  <FieldLegend>Önüm goş</FieldLegend>
+                  <FieldLegend>{t("add_product")}</FieldLegend>
                   <FieldDescription>
-                     Harydyňyzy satlyga çykarmak üçin maglumatlary giriziň we suratlary ýükläň.
+                     {t("add_product_description")}
                   </FieldDescription>
                </FieldSet>
 
                <FieldSet>
                   <FieldGroup>
                      <Field>
-                        <FieldLabel>Esasy kategoriýa</FieldLabel>
+                        <FieldLabel>{t("main_category")}</FieldLabel>
                         <Select onValueChange={(value) => {
                            setSelectedParentCategory(value)
                            setSelectedSubCategory(null)
                         }}
                         >
                            <SelectTrigger>
-                              <SelectValue placeholder="Kategoriýa saýlaň" />
+                              <SelectValue placeholder={t("select_category")} />
                            </SelectTrigger>
                            <SelectContent>
                               {parentCategories.map(category => (
@@ -218,11 +220,11 @@ export default function AddProductForm() {
                      </Field>
                      {selectedParentCategory && (
                         <Field>
-                           <FieldLabel>Içki kategoriýa</FieldLabel>
+                           <FieldLabel>{t("sub_category")}</FieldLabel>
                            <Select onValueChange={setSelectedSubCategory}
                            >
                               <SelectTrigger>
-                                 <SelectValue placeholder="Içki kategoriýa saýlaň" />
+                                 <SelectValue placeholder={t("select_sub_category")} />
                               </SelectTrigger>
                               <SelectContent>
                                  {subCategories.map(category => (
@@ -240,13 +242,13 @@ export default function AddProductForm() {
                      <FieldSet>
                         <FieldGroup>
                            <Field>
-                              <FieldLabel htmlFor="title">Gysgaça ady</FieldLabel>
+                              <FieldLabel htmlFor="title">{t("short_title")}</FieldLabel>
                               <Input
                                  id="title"
                                  name="title"
                                  minLength={5}
                                  maxLength={20}
-                                 placeholder="20 simwoldan az"
+                                 placeholder={t("less_than_20_chars")}
                                  required
                               />
                            </Field>
@@ -255,14 +257,14 @@ export default function AddProductForm() {
                      <FieldSet>
                         <FieldGroup>
                            <Field>
-                              <FieldLabel htmlFor="price">Bahasy (USDT)</FieldLabel>
+                              <FieldLabel htmlFor="price">{t("price_in_usdt")}</FieldLabel>
                               <Input
                                  id="price"
                                  name="price"
                                  type="number"
                                  min={1}
                                  step="0.01"
-                                 placeholder="Bahasyny giriziň"
+                                 placeholder={t("enter_price")}
                                  required
                               />
                            </Field>
@@ -282,7 +284,7 @@ export default function AddProductForm() {
                                     <div key={url} className="relative aspect-square">
                                        <Image
                                           src={url}
-                                          alt={`Önizleme ${index + 1}`}
+                                          alt={`${t("preview")} ${index + 1}`}
                                           className="w-full h-full object-cover rounded-md border"
                                           fill
                                           sizes="33vw"
@@ -299,7 +301,7 @@ export default function AddProductForm() {
                                        </button>
                                        {index === 0 && (
                                           <span className="absolute bottom-1 left-1 bg-blue-600 text-white text-xs px-1 rounded-sm z-10">
-                                             Esasy
+                                             {t("main")}
                                           </span>
                                        )}
                                     </div>
@@ -310,10 +312,10 @@ export default function AddProductForm() {
                                  <ImagePlus color="gray" size={46} className="self-center my-2" />
                                  <CardHeader>
                                     <CardTitle className="text-center text-sm">
-                                       Suratlary ýükläň
+                                       {t("upload_images")}
                                     </CardTitle>
                                     <CardDescription className="text-center text-xs">
-                                       Azyndan 1 surat bolmaly.
+                                       {t("at_least_one_image")}
                                     </CardDescription>
                                  </CardHeader>
                               </div>
@@ -327,7 +329,7 @@ export default function AddProductForm() {
                                     disabled
                                  >
                                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />{" "}
-                                    Ýüklenýär...
+                                    {t("uploading")}
                                  </Button>
                               ) : (
                                  <Button
@@ -337,7 +339,7 @@ export default function AddProductForm() {
                                     onClick={handleUploadClick}
                                     disabled={tempImageUrls.length >= 6}
                                  >
-                                    <Upload className="w-4 h-4 mr-2" /> Saýla
+                                    <Upload className="w-4 h-4 mr-2" /> {t("select")}
                                  </Button>
                               )}
                               <input
@@ -358,14 +360,14 @@ export default function AddProductForm() {
                         <FieldGroup>
                            <Field>
                               <FieldLabel htmlFor="description">
-                                 Giňişleýin düşündiriş
+                                 {t("detailed_description")}
                               </FieldLabel>
                               <Textarea
                                  minLength={20}
                                  maxLength={10000}
                                  id="description"
                                  name="description"
-                                 placeholder="Goşmaça maglumatlary şu ýere giriziň..."
+                                 placeholder={t("enter_additional_info")}
                                  className="resize-none"
                                  required
                               />
@@ -384,7 +386,7 @@ export default function AddProductForm() {
                      isSubmitting || isUploading || tempImageUrls.length === 0 || !selectedSubCategory
                   }
                >
-                  {isSubmitting ? "Ugradylýar..." : "Tabşyr"}
+                  {isSubmitting ? t("submitting") : t("submit")}
                </Button>
             </div>
          </form>

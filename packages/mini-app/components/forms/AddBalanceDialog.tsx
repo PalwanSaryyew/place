@@ -28,12 +28,12 @@ export function AddBalanceDialog() {
 
    const handlePayment = async (status: "success" | "fail") => {
       if (!initData) {
-         setError("Telegram user data not available. Please try again later.");
+         setError(t("telegram_user_data_not_available"));
          return;
       }
 
       if (amount <= 0) {
-         setError("Please enter a valid amount.");
+         setError(t("please_enter_a_valid_amount"));
          return;
       }
 
@@ -53,20 +53,20 @@ export function AddBalanceDialog() {
          const data = await response.json();
 
          if (!response.ok) {
-            throw new Error(data.error || "Failed to create payment");
+            throw new Error(data.error || t("failed_to_create_payment"));
          }
 
          if (data.paymentUrl) {
             webApp?.openLink(data.paymentUrl);
          } else {
-            throw new Error("Payment URL not found in response.");
+            throw new Error(t("payment_url_not_found_in_response"));
          }
       } catch (error: unknown) {
          const errorMessage =
             error instanceof Error
                ? error.message
-               : "An unknown error occurred.";
-         console.error("Error adding balance:", errorMessage);
+               : t("an_unknown_error_occurred");
+         console.error(t("error_adding_balance"), errorMessage);
          setError(errorMessage);
       } finally {
          setLoading(false);
@@ -101,7 +101,9 @@ export function AddBalanceDialog() {
                </div>
                <div className="grid grid-cols-4 items-center gap-4">
                   <Label className="text-right">{t("total_amount")}</Label>
-                  <div className="col-span-3">{totalAmount} USDT</div>
+                  <div className="col-span-3">
+                     {totalAmount} {t("usdt")}
+                  </div>
                </div>
                {error && <div className="text-red-500 text-sm">{error}</div>}
             </div>
@@ -110,14 +112,14 @@ export function AddBalanceDialog() {
                   onClick={() => handlePayment("success")}
                   disabled={loading}
                >
-                  {loading ? "Processing..." : t("pay_success")}
+                  {loading ? t("processing") : t("pay_success")}
                </Button>
                <Button
                   onClick={() => handlePayment("fail")}
                   disabled={loading}
                   variant="destructive"
                >
-                  {loading ? "Processing..." : t("pay_fail")}
+                  {loading ? t("processing") : t("pay_fail")}
                </Button>
             </div>
          </DialogContent>

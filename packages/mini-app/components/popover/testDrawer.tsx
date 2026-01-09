@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import {
    Drawer,
@@ -11,20 +12,21 @@ import {
 } from "../ui/drawer";
 
 const TestDrawer = () => {
+   const t = useTranslations("testDrawer");
    return (
       <Drawer>
-         <DrawerTrigger>Open</DrawerTrigger>
+         <DrawerTrigger>{t("open")}</DrawerTrigger>
          <DrawerContent>
             <DrawerHeader>
-               <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+               <DrawerTitle>{t("are_you_sure")}</DrawerTitle>
                <DrawerDescription>
-                  This action cannot be undone.
+                  {t("this_action_cannot_be_undone")}
                </DrawerDescription>
             </DrawerHeader>
             <DrawerFooter>
-               <Button>Submit</Button>
+               <Button>{t("submit")}</Button>
                <DrawerClose>
-                  <Button variant="outline">Cancel</Button>
+                  <Button variant="outline">{t("cancel")}</Button>
                </DrawerClose>
             </DrawerFooter>
          </DrawerContent>

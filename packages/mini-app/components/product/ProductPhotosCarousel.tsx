@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import FullScreenImageViewer from "./FullScreenImageViewer";
+import { useTranslations } from "next-intl";
 
 export function ProductPhotosCarousel({ imageUrls }: { imageUrls: string[] }) {
+    const t = useTranslations("productPhotosCarousel");
     const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null);
 
     const openFullScreen = (index: number) => {
@@ -38,7 +40,7 @@ export function ProductPhotosCarousel({ imageUrls }: { imageUrls: string[] }) {
                                     <Image
                                         fill
                                         src={url}
-                                        alt={`Product Photo ${index + 1}`}
+                                        alt={`${t("alt_text")} ${index + 1}`}
                                         className="object-cover"
                                     />
                                 </CardContent>

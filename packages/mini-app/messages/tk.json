@@ -7,11 +7,23 @@
          "share": "Paýlaş",
          "wait": "Garaşyň..."
       },
-      "close": "Ýap"
+      "close": "Ýap",
+      "twa_loading_error": "TWA ýüklenip bolmady",
+      "telegram_only_feature": "Bu aýratynlyk diňe Telegram içinde işleýär.",
+      "user_info_not_found": "Ulanyjy maglumatlary alnyp bolmady.",
+      "api_error": "API ýalňyşlygy",
+      "message_shared_successfully": "Habar üstünlikli paýlaşyldy!",
+      "message_id_not_found": "Habar ID tapylmady",
+      "share_error": "Paýlaşma ýalňyşlygy:",
+      "currency": "USDT"
    },
    "languageDialog": {
       "title": "Dil saýlaň",
-      "explanation": "Isleg bildirýän diliňizi saýlaň."
+      "explanation": "Isleg bildirýän diliňizi saýlaň.",
+      "english": "Iňlis",
+      "turkmen": "Türkmen",
+      "russian": "Rus",
+      "turkish": "Türk"
    },
    "wallet": {
       "add_balance": "Balansy artdyr",
@@ -20,7 +32,15 @@
       "total_amount": "Jemi Mukdar",
       "pay": "Töle",
       "pay_success": "Töle (üstünlikli)",
-      "pay_fail": "Töle (şowsuz)"
+      "pay_fail": "Töle (şowsuz)",
+      "telegram_user_data_not_available": "Telegram ulanyjy maglumatlary elýeterli däl. Soňra täzeden synanyşyň.",
+      "please_enter_a_valid_amount": "Dogry mukdar giriziň.",
+      "failed_to_create_payment": "Töleg döredip bolmady",
+      "payment_url_not_found_in_response": "Töleg URL-si jogapda tapylmady.",
+      "an_unknown_error_occurred": "Näsazlyk ýüze çykdy.",
+      "error_adding_balance": "Balans goşulanda ýalňyşlyk:",
+      "usdt": "USDT",
+      "processing": "Dowam edýär..."
    },
    "attributes": {
       "pubg_account": {
@@ -34,6 +54,149 @@
          "sports_cars": "Sport awtomobilleri",
          "royale_pass": "Açylan Royal Pass-lar",
          "companions_count": "Eldeki Ýoldaşlar"
+      },
+      "telegram_nft_gift": {
+         "nft_collection": "NFT kolleksiýasy",
+         "nft_collection_placeholder": "Meselem, seýrek ulanyjy ady",
+         "validity": "Möhleti",
+         "validity_placeholder": "Meselem, 1 ýyl"
       }
+   },
+   "footer": {
+      "profile": "Profil",
+      "wallet": "Gapjyk",
+      "change_language": "Dili üýtgetmek",
+      "english": "Iňlis",
+      "turkmen": "Türkmen",
+      "russian": "Rus",
+      "turkish": "Türk",
+      "settings": "Sazlamalar",
+      "log_out": "Ulgamdan çykmak"
+   },
+   "addProductForm": {
+      "failed_to_fetch_categories": "Kategoriýalary alyp bolmady",
+      "failed_to_load_categories": "Kategoriýalary ýükläp bolmady.",
+      "max_6_images": "Iň köp 6 surat ýükläp bilersiňiz.",
+      "image_upload_failed": "Surat ýüklenmedi",
+      "image_upload_error": "Surat ýüklemekde ýalňyşlyk ýüze çykdy.",
+      "select_category_warning": "Kategoriýa saýlanyň.",
+      "submitting_data": "Maglumatlar ugradylýar...",
+      "product_added_successfully": "Önüm üstünlikli goşuldy!",
+      "error": "Ýalňyşlyk",
+      "something_went_wrong": "Näsazlyk",
+      "network_error": "Tor ýalňyşlygy.",
+      "add_product": "Önüm goş",
+      "add_product_description": "Harydyňyzy satlyga çykarmak üçin maglumatlary giriziň we suratlary ýükläň.",
+      "main_category": "Esasy kategoriýa",
+      "select_category": "Kategoriýa saýlaň",
+      "sub_category": "Içki kategoriýa",
+      "select_sub_category": "Içki kategoriýa saýlaň",
+      "short_title": "Gysgaça ady",
+      "less_than_20_chars": "20 simwoldan az",
+      "price_in_usdt": "Bahasy (USDT)",
+      "enter_price": "Bahasyny giriziň",
+      "preview": "Önizleme",
+      "main": "Esasy",
+      "upload_images": "Suratlary ýükläň",
+      "at_least_one_image": "Azyndan 1 surat bolmaly.",
+      "uploading": "Ýüklenýär...",
+      "select": "Saýla",
+      "detailed_description": "Giňişleýin düşündiriş",
+      "enter_additional_info": "Goşmaça maglumatlary şu ýere giriziň...",
+      "submitting": "Ugradylýar...",
+      "submit": "Tabşyr",
+      "pubg_accounts": "PUBG hasaplary",
+      "telegram_nft_gifts": "Telegram NFT sowgatlary"
+   },
+   "editProductForm": {
+      "max_6_images": "Iň köp 6 surat ýükläp bilersiňiz.",
+      "image_upload_failed": "Surat ýüklenmedi",
+      "image_upload_error": "Surat ýüklemekde ýalňyşlyk ýüze çykdy.",
+      "updating_data": "Maglumatlar täzelenýär...",
+      "product_updated_successfully": "Önüm üstünlikli täzelendi!",
+      "error": "Ýalňyşlyk",
+      "something_went_wrong": "Näsazlyk",
+      "network_error": "Tor ýalňyşlygy.",
+      "product_information": "Önüm maglumatlary",
+      "edit_account_information": "Hasabyň maglumatlaryny düzediň.",
+      "short_title": "Gysgaça ady",
+      "price_in_tmt": "Bahasy (USDT)",
+      "previous_image": "Öňki surat",
+      "new_image": "Täze surat",
+      "select_images": "Suratlary saýlaň",
+      "at_least_one_image": "Azyndan 1 surat bolmaly.",
+      "uploading": "Ýüklenýär...",
+      "add_image": "Surat goş",
+      "detailed_description": "Giňişleýin düşündiriş",
+      "updating": "Täzelenýär...",
+      "update": "Täzele"
+   },
+   "commentsDrawer": {
+      "comments_could_not_be_loaded": "Teswirleri ýükläp bolmady.",
+      "telegram_app_required_for_comment": "Teswir ibermek üçin Telegram programmasy gerek.",
+      "comment_could_not_be_sent": "Teswir iberip bolmady.",
+      "no_comments_yet": "Heniz teswir ýok. Birinji bol!",
+      "comments": "Teswirler",
+      "comments_for_product": "{productName} harydy üçin edilen teswirler.",
+      "write_your_comment": "Teswiriňizi ýazyň..."
+   },
+   "testDrawer": {
+      "open": "Aç",
+      "are_you_sure": "Siz doly ynanýarsyňyzmy?",
+      "this_action_cannot_be_undone": "Bu hereketi yzyna gaýtaryp bolmaz.",
+      "submit": "Tassykla",
+      "cancel": "Ýatyr"
+   },
+   "editProduct": {
+      "edit": "Düzediş",
+      "edit_product": "Önümi Düzediň",
+      "you_can_update_the_information": "Maglumatlary täzeläp bilersiňiz.",
+      "cancel": "Bes et"
+   },
+   "fullScreenImageViewer": {
+      "alt_text": "Doly ekran"
+   },
+   "infiniteProductList": {
+      "error_loading_products_1": "Önümleri ýüklemekde ýalňyşlyk ýüze çykdy. (1)",
+      "data_extraction_error": "Maglumat çykarmada ýalňyşlyk:",
+      "error_loading_products_2": "Önümleri ýüklemekde ýalňyşlyk ýüze çykdy. (2)",
+      "loading_notifications": "Bildirişler yüklenyär...",
+      "loading_more": "Dowamy ýüklenýär.",
+      "finished": "Gutardy!",
+      "no_notifications": "Bildiriş ýok."
+   },
+   "myProductCard": {
+      "product_published": "Önüm satyşa çykaryldy",
+      "product_unpublished": "Önüm Satyşdan aýryldy",
+      "status_update_failed": "Statusy täzeläp bolmady",
+      "confirm_delete": "Çyndanam önümi pozmakçymy?",
+      "product_deleted": "Önüm pozuldy",
+      "delete_failed": "Önümi pozmakda ýalňyşlyk ýüze çykdy",
+      "error_occurred": "Ýalňyşlyk ýüze çykdy",
+      "on_sale": "Satyşda",
+      "not_on_sale": "Satyşda däl",
+      "currency": "USDT",
+      "actions": "Amallar",
+      "preview": "Synla",
+      "comments": "Teswirler",
+      "unpublish": "Satyşdan aýyr",
+      "publish": "Satyşa çykar",
+      "delete": "Poz"
+   },
+   "productCard": {
+      "currency": "USDT"
+   },
+   "productPhotosCarousel": {
+      "alt_text": "Haryt Suraty"
+   },
+   "myProductsPage": {
+      "init_data_sent_to_api": "API'ye gönderilen initData:",
+      "error_loading_products": "Ürünler yüklenirken bir hata oluştu.",
+      "fetch_error": "Fetch hatası:",
+      "network_error": "Ağ hatası",
+      "my_accounts_for_sale": "Meniň Satlyk Hasaplarym",
+      "loading_products": "Önümler ýüklenýär...",
+      "error": "Ýalňyşlyk",
+      "no_accounts_for_sale": "Hiç hili satlyk hasap tapylmady. Täze hasap goşmak üçin Goş düwmesine basyň."
    }
 }

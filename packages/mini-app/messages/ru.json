@@ -1,0 +1,202 @@
+{
+   "productDrawer": {
+      "buy": "Купить",
+      "comments": "Комментарии",
+      "attributes": "Атрибуты",
+      "share": {
+         "share": "Поделиться",
+         "wait": "Пожалуйста, подождите..."
+      },
+      "close": "Закрывать",
+      "twa_loading_error": "TWA не может быть загружен",
+      "telegram_only_feature": "Эта функция работает только в Telegram.",
+      "user_info_not_found": "Информация о пользователе не может быть получена.",
+      "api_error": "Ошибка API",
+      "message_shared_successfully": "Сообщение успешно отправлено!",
+      "message_id_not_found": "Идентификатор сообщения не найден",
+      "share_error": "Ошибка общего доступа:",
+      "currency": "USDT"
+   },
+   "languageDialog": {
+      "title": "Выберите язык",
+      "explanation": "Выберите предпочитаемый язык.",
+      "english": "английский",
+      "turkmen": "Туркменский",
+      "russian": "Русский",
+      "turkish": "Турецкий"
+   },
+   "wallet": {
+      "add_balance": "Добавить баланс",
+      "amount": "Сумма",
+      "commission": "Комиссия",
+      "total_amount": "Итого",
+      "pay": "Платить",
+      "pay_success": "Оплата (успешно)",
+      "pay_fail": "Оплата (неудачно)",
+      "telegram_user_data_not_available": "Пользовательские данные Telegram недоступны. Пожалуйста, повторите попытку позже.",
+      "please_enter_a_valid_amount": "Пожалуйста, введите действительную сумму.",
+      "failed_to_create_payment": "Не удалось создать платеж",
+      "payment_url_not_found_in_response": "URL платежа не найден в ответе.",
+      "an_unknown_error_occurred": "Произошла неизвестная ошибка.",
+      "error_adding_balance": "Ошибка при добавлении баланса:",
+      "usdt": "USDT",
+      "processing": "Обработка..."
+   },
+   "attributes":{
+      "pubg_account":{
+         "game_id": "ID игры",
+         "account_level": "Уровень аккаунта",
+         "collection_level": "Уровень коллекции",
+         "upgradeable_weapons": "Модернизируемое оружие",
+         "ultimate_suits": "Совершенные костюмы",
+         "upgradeable_vehicles": "Модернизируемые автомобили",
+         "brand_vehicles": "Брендовые автомобили",
+         "sports_cars": "Спортивные автомобили",
+         "royale_pass": "Открыт Королевский абонемент",
+         "companions_count": "Количество компаньонов"
+      },
+      "telegram_nft_gift": {
+         "nft_collection": "Коллекция NFT",
+         "nft_collection_placeholder": "например, редкие имена пользователей",
+         "validity": "Срок действия",
+         "validity_placeholder": "например, 1 год"
+      }
+   },
+   "footer": {
+      "profile": "Профиль",
+      "wallet": "Кошелек",
+      "change_language": "Изменить язык",
+      "english": "английский",
+      "turkmen": "Туркменский",
+      "russian": "Русский",
+      "turkish": "Турецкий",
+      "settings": "Настройки",
+      "log_out": "Выйти"
+   },
+   "addProductForm": {
+      "failed_to_fetch_categories": "Не удалось загрузить категории",
+      "failed_to_load_categories": "Не удалось загрузить категории",
+      "max_6_images": "Вы можете загрузить не более 6 изображений.",
+      "image_upload_failed": "Загрузка изображения не удалась",
+      "image_upload_error": "Произошла ошибка при загрузке изображения.",
+      "select_category_warning": "Пожалуйста, выберите категорию.",
+      "submitting_data": "Отправка данных...",
+      "product_added_successfully": "Товар успешно добавлен!",
+      "error": "Ошибка",
+      "something_went_wrong": "Что-то пошло не так",
+      "network_error": "Ошибка сети.",
+      "add_product": "Добавить товар",
+      "add_product_description": "Введите информацию, чтобы выставить свой товар на продажу, и загрузите изображения.",
+      "main_category": "Основная категория",
+      "select_category": "Выберите категорию",
+      "sub_category": "Подкатегория",
+      "select_sub_category": "Выберите подкатегорию",
+      "short_title": "Краткое название",
+      "less_than_20_chars": "Менее 20 символов",
+      "price_in_usdt": "Цена (в долларах США)",
+      "enter_price": "Введите цену",
+      "preview": "Предварительный просмотр",
+      "main": "Основной",
+      "upload_images": "Загрузить изображения",
+      "at_least_one_image": "Требуется как минимум 1 изображение.",
+      "uploading": "Загрузка...",
+      "select": "Выбирать",
+      "detailed_description": "Подробное описание",
+      "enter_additional_info": "Введите здесь дополнительную информацию...",
+      "submitting": "Отправка...",
+      "submit": "Отправлять",
+      "pubg_accounts": "Аккаунты PUBG",
+      "telegram_nft_gifts": "Подарки Telegram NFT"
+   },
+   "editProductForm": {
+      "max_6_images": "Вы можете загрузить не более 6 изображений.",
+      "image_upload_failed": "Загрузка изображения не удалась",
+      "image_upload_error": "Произошла ошибка при загрузке изображения.",
+      "updating_data": "Обновление данных...",
+      "product_updated_successfully": "Продукт успешно обновлен!",
+      "error": "Ошибка",
+      "something_went_wrong": "Что-то пошло не так",
+      "network_error": "Ошибка сети.",
+      "product_information": "Информация о продукте",
+      "edit_account_information": "Изменить информацию об учетной записи.",
+      "short_title": "Краткое название",
+      "price_in_tmt": "Цена (USDT)",
+      "previous_image": "Предыдущее изображение",
+      "new_image": "Новое изображение",
+      "select_images": "Выбрать изображения",
+      "at_least_one_image": "Требуется как минимум 1 изображение.",
+      "uploading": "Загрузка...",
+      "add_image": "Добавить изображение",
+      "detailed_description": "Подробное описание",
+      "updating": "Обновление...",
+      "update": "Обновлять"
+   },
+   "commentsDrawer": {
+      "comments_could_not_be_loaded": "Не удалось загрузить комментарии.",
+      "telegram_app_required_for_comment": "Для отправки комментариев требуется приложение Telegram.",
+      "comment_could_not_be_sent": "Не удалось отправить комментарий.",
+      "no_comments_yet": "Комментариев пока нет. Будь первым!",
+      "comments": "Комментарии",
+      "comments_for_product": "Комментарии к {productName}",
+      "write_your_comment": "Напишите свой комментарий..."
+   },
+   "testDrawer": {
+      "open": "Открыть",
+      "are_you_sure": "Вы абсолютно уверены?",
+      "this_action_cannot_be_undone": "Это действие нельзя отменить.",
+      "submit": "Отправлять",
+      "cancel": "Отмена"
+   },
+   "editProduct": {
+      "edit": "Редактировать",
+      "edit_product": "Редактировать товар",
+      "you_can_update_the_information": "Вы можете обновить информацию.",
+      "cancel": "Отмена"
+   },
+   "fullScreenImageViewer": {
+      "alt_text": "Полноэкранный"
+   },
+   "infiniteProductList": {
+      "error_loading_products_1": "Ошибка при загрузке товаров. (1)",
+      "data_extraction_error": "Ошибка извлечения данных:",
+      "error_loading_products_2": "Ошибка при загрузке товаров. (2)",
+      "loading_notifications": "Загрузка уведомлений...",
+      "loading_more": "Загружается еще...",
+      "finished": "Завершенный!",
+      "no_notifications": "Никаких уведомлений."
+   },
+   "myProductCard": {
+      "product_published": "Товар опубликован",
+      "product_unpublished": "Товар снят с публикации",
+      "status_update_failed": "Не удалось обновить статус.",
+      "confirm_delete": "Вы уверены, что хотите удалить товар?",
+      "product_deleted": "Товар удален",
+      "delete_failed": "Не удалось удалить товар",
+      "error_occurred": "Произошла ошибка",
+      "on_sale": "В продаже",
+      "not_on_sale": "Нет в продаже",
+      "currency": "USDT",
+      "actions": "Действия",
+      "preview": "Предварительный просмотр",
+      "comments": "Комментарии",
+      "unpublish": "Снять с публикации",
+      "publish": "Публиковать",
+      "delete": "Удалить"
+   },
+   "productCard": {
+      "currency": "USDT"
+   },
+   "productPhotosCarousel": {
+      "alt_text": "Фотография продукта"
+   },
+   "myProductsPage": {
+      "init_data_sent_to_api": "initData отправлено в API:",
+      "error_loading_products": "Произошла ошибка при загрузке товаров.",
+      "fetch_error": "Ошибка выборки:",
+      "network_error": "Ошибка сети",
+      "my_accounts_for_sale": "Мои аккаунты на продажу",
+      "loading_products": "Загрузка товаров...",
+      "error": "Ошибка",
+      "no_accounts_for_sale": "Аккаунты для продажи не найдены. Нажмите кнопку «Добавить», чтобы добавить новую учетную запись."
+   }
+}
