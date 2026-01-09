@@ -54,6 +54,7 @@ shared/generated/
 # Uploads and temp files
 /public/uploads
 /uploads/
+packages/mini-app/uploads/
 /temp/
 
 # Logs

@@ -117,11 +117,20 @@ export default function AddProductForm() {
       const price = formData.get("price") as string;
       const description = formData.get("description") as string;
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const attributes: { [key: string]: any } = {};
+      const attributes: { [key: string]: string | number } = {};
+      const attributeRegex = /attributes\[(.*?)\]/;
       for (const [key, value] of formData.entries()) {
-         if (key.startsWith('attributes.')) {
-            attributes[key.replace('attributes.', '')] = value;
+         const match = key.match(attributeRegex);
+         if (match && value) {
+            const attrName = match[1];
+            if (attrName === "game_id") {
+               attributes[attrName] = value as string;
+            } else {
+               const numValue = parseFloat(value as string);
+               if (!isNaN(numValue)) {
+                  attributes[attrName] = numValue;
+               }
+            }
          }
       }
 
