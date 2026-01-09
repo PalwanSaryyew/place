@@ -21,5 +21,19 @@
       "pay": "Pay",
       "pay_success": "Pay (Success)",
       "pay_fail": "Pay (Fail)"
+   },
+   "attributes":{
+      "pubg_account":{
+         "game_id": "Game ID",
+         "account_level": "Account Level",
+         "collection_level": "Collection Level",
+         "upgradeable_weapons": "Upgradeable Weapons",
+         "ultimate_suits": "Ultimate Suits",
+         "upgradeable_vehicles": "Upgradeable Vehicles",
+         "brand_vehicles": "Brand Vehicles",
+         "sports_cars": "Sports Cars",
+         "royale_pass": "Royal Passes Opened",
+         "companions_count": "Companions Count"
+      }
    }
 }

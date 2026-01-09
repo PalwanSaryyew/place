@@ -21,5 +21,19 @@
       "pay": "Töle",
       "pay_success": "Töle (üstünlikli)",
       "pay_fail": "Töle (şowsuz)"
+   },
+   "attributes": {
+      "pubg_account": {
+         "game_id": "Oýun ID",
+         "account_level": "Hasap Level",
+         "collection_level": "Kolleksiýa Derejesi",
+         "upgradeable_weapons": "Ösdürilýän ýaraglar",
+         "ultimate_suits": "Ultimate kostýumlar",
+         "upgradeable_vehicles": "Ösdürilýän Ulaglar",
+         "brand_vehicles": "Marka Ulaglar",
+         "sports_cars": "Sport awtomobilleri",
+         "royale_pass": "Açylan Royal Pass-lar",
+         "companions_count": "Eldeki Ýoldaşlar"
+      }
    }
 }

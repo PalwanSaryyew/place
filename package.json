@@ -6,9 +6,9 @@
       "packages/*"
    ],
    "scripts": {
-      "dev:mini-app": "npm run dev --workspace=@nexuz/mini-app",
-      "build:mini-app": "npm run build --workspace=@nexuz/mini-app",
-      "start:mini-app": "npm run start --workspace=@nexuz/mini-app",
+      "dev:app": "npm run dev --workspace=@nexuz/mini-app",
+      "build:app": "npm run build --workspace=@nexuz/mini-app",
+      "start:app": "npm run start --workspace=@nexuz/mini-app",
       "start:bot": "npm run start --workspace=@nexuz/bot"
    }
 }

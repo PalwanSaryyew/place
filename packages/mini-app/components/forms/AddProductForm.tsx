@@ -21,6 +21,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import PubgAccountFields from "./dynamic/PubgAccountFields";
 import TelegramNftGiftFields from "./dynamic/TelegramNftGiftFields";
 
+
 interface Category {
    id: string;
    name: string;
@@ -175,7 +176,7 @@ export default function AddProductForm() {
       }
    }
 
-
+ 
    return (
       <div className="w-full max-w-md mx-auto">
          <form onSubmit={handleSubmit}>
@@ -245,7 +246,7 @@ export default function AddProductForm() {
                      <FieldSet>
                         <FieldGroup>
                            <Field>
-                              <FieldLabel htmlFor="price">Bahasy (TMT)</FieldLabel>
+                              <FieldLabel htmlFor="price">Bahasy (USDT)</FieldLabel>
                               <Input
                                  id="price"
                                  name="price"
