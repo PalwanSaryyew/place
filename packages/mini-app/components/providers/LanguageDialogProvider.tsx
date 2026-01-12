@@ -47,6 +47,8 @@ export function LanguageDialogProvider({
           <div className="flex flex-col gap-2">
             <Button onClick={() => handleLanguageChange("en")}>English</Button>
             <Button onClick={() => handleLanguageChange("tk")}>Türkmen</Button>
+            <Button onClick={() => handleLanguageChange("tr")}>Türkçe</Button>
+            <Button onClick={() => handleLanguageChange("ru")}>Русский</Button>
           </div>
         </DialogContent>
       </Dialog>

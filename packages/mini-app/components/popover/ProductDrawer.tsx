@@ -202,7 +202,7 @@ export function ProductDrawer({
             <div className="grid grid-cols-2 gap-2 text-left">
                {Object.entries(attributes).map(([key, value]) => (
                   <React.Fragment key={key}>
-                     <div className="font-medium text-sm">{key}</div>
+                     <div className="font-medium text-sm">{t(key)}</div>
                      <div className="text-sm">{String(value)}</div>
                   </React.Fragment>
                ))}
@@ -240,7 +240,7 @@ export function ProductDrawer({
                {children}
             </div>
 
-            <DrawerContent className="!max-h-[90dvh] flex flex-col focus:outline-none">
+            <DrawerContent className="max-h-[90dvh]! flex flex-col focus:outline-none">
                {isLoading && !isOpen ? (
                   <DrawerLoadingContent />
                ) : (
