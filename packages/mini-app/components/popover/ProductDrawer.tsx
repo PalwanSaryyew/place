@@ -63,6 +63,7 @@ export function ProductDrawer({
    const isOpen = searchParams.get("product-id") === id;
 
    const t = useTranslations("productDrawer");
+   const ta = useTranslations("attributes.pubg_account");
 
    React.useEffect(() => {
       const initWebApp = async () => {
@@ -202,7 +203,7 @@ export function ProductDrawer({
             <div className="grid grid-cols-2 gap-2 text-left">
                {Object.entries(attributes).map(([key, value]) => (
                   <React.Fragment key={key}>
-                     <div className="font-medium text-sm">{t(key)}</div>
+                     <div className="font-medium text-sm">{ta(key)}</div>
                      <div className="text-sm">{String(value)}</div>
                   </React.Fragment>
                ))}

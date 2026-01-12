@@ -7,7 +7,8 @@
          "share": "Share",
          "wait": "Please wait..."
       },
-      "close": "Close"
+      "close": "Close",
+      "currency": "USDT"
    },
    "languageDialog": {
       "title": "Select Language",
