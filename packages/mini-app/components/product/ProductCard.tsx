@@ -54,7 +54,7 @@ export default function ProductCard({
                {/* <CardAction>Card Action</CardAction> */}
             </CardHeader>
             <CardContent className="px-2">
-               <CardDescription className="text-sm sm:text-base line-clamp-2">
+               <CardDescription className="text-sm sm:text-base whitespace-pre-wrap max-h-24 overflow-y-auto">
                   {description}
                </CardDescription>
             </CardContent>

@@ -226,7 +226,7 @@ export function ProductDrawer({
                   {price} {t("currency")}
                </Badge>
             </div>
-            <DrawerDescription className="mt-2 text-base text-left leading-relaxed">
+            <DrawerDescription className="mt-2 text-base text-left leading-relaxed whitespace-pre-wrap">
                {description}
             </DrawerDescription>
             <AttributesSection attributes={attributes} />
