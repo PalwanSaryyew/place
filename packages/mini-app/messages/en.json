@@ -15,7 +15,8 @@
       "message_shared_successfully": "Message shared successfully!",
       "message_id_not_found": "Message ID not found",
       "share_error": "Sharing error:",
-      "currency": "USDT"
+      "currency": "USDT",
+      "last_updated": "Last updated on {date}"
    },
    "languageDialog": {
       "title": "Select Language",

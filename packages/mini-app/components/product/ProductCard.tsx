@@ -10,6 +10,7 @@ import Image from "next/image";
 import { ProductDrawer } from "../popover/ProductDrawer";
 import { JsonValue } from "@/generated/prisma/internal/prismaNamespace";
 import { useTranslations } from "next-intl";
+import { ProductEditHistory } from "../../../shared/generated/prisma/client";
 
 export interface ProductCardProps {
    id: string;
@@ -18,6 +19,7 @@ export interface ProductCardProps {
    price: number;
    imageUrls: string[];
    attributes: JsonValue;
+   editHistory?: ProductEditHistory[];
 }
 
 export default function ProductCard({
@@ -27,6 +29,7 @@ export default function ProductCard({
    price,
    imageUrls,
    attributes,
+   editHistory,
 }: ProductCardProps) {
    const t = useTranslations("productCard");
    return (
@@ -37,6 +40,7 @@ export default function ProductCard({
          price={price}
          imageUrls={imageUrls}
          attributes={attributes}
+         editHistory={editHistory}
       >
          <Card className="w-full overflow-hidden pt-0 pb-4 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl">
             <CardHeader className="p-0">

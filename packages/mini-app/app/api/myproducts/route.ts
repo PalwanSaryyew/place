@@ -77,6 +77,9 @@ export async function POST(request: NextRequest) {
       console.log(`Kullanıcı ${user.id} bulundu, ürünleri aranıyor...`);
       const products = await withTimeout(prisma.product.findMany({
          where: { userId: user.id },
+         include: {
+            category: true, // Fetch related category data
+         },
          orderBy: { createdAt: "desc" },
       }), DATABASE_TIMEOUT);
 

@@ -3,7 +3,7 @@
 import { ImagePlus, Loader2, Upload, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter }  from "next/navigation";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { useWebApp } from "@/context/WebAppContext";
 import { toast } from "sonner";
@@ -13,9 +13,21 @@ import { CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { Product } from "@/generated/prisma/client";
+import PubgAccountFields from "./dynamic/PubgAccountFields";
+import TelegramNftGiftFields from "./dynamic/TelegramNftGiftFields";
+
+interface Category {
+   id: number;
+   name: string;
+   children: Category[];
+}
+
+interface Attributes {
+    [key: string]: string | number;
+}
 
 interface EditProductFormProps {
-   product: Product;
+   product: Product & { category: { name: string, parentId: number | null }};
    onSuccess?: () => void;
 }
 
@@ -25,15 +37,38 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
    const router = useRouter();
    const fileInputRef = useRef<HTMLInputElement>(null);
 
-   // --- NEW STATE MANAGEMENT ---
    const [existingImages, setExistingImages] = useState<string[]>(product.images || []);
    const [newTempImageUrls, setNewTempImageUrls] = useState<string[]>([]);
    const [isUploading, setIsUploading] = useState(false);
    const [isSubmitting, setIsSubmitting] = useState(false);
+   
+   const [parentCategoryName, setParentCategoryName] = useState<string>('');
+
+   useEffect(() => {
+      const fetchCategories = async () => {
+         try {
+            const response = await fetch('/api/categories');
+            if (!response.ok) throw new Error('Failed to fetch categories');
+            const data = await response.json();
+            
+            // Find parent category name
+            if (product.category.parentId) {
+                const parent = data.find((c: Category) => c.id === product.category.parentId);
+                if (parent) {
+                    setParentCategoryName(parent.name);
+                }
+            }
+         } catch (error) {
+            console.error(error);
+            toast.error(t("failed_to_load_categories"));
+         }
+      };
+      fetchCategories();
+   }, [t, product.category.parentId]);
+
 
    const totalImages = existingImages.length + newTempImageUrls.length;
 
-   // --- IMMEDIATE UPLOAD LOGIC ---
    const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
       const files = Array.from(event.target.files || []);
       if (files.length === 0) return;
@@ -61,7 +96,6 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
 
       } catch (error) {
          console.log(error);
-         
          toast.error(t("image_upload_error"));
       } finally {
          setIsUploading(false);
@@ -75,7 +109,6 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
 
    const removeNewTempImage = (urlToRemove: string) => {
       setNewTempImageUrls(prev => prev.filter(url => url !== urlToRemove));
-      // Note: Does not delete from server temp folder.
    };
    
    const handleUploadClick = (e: React.MouseEvent) => {
@@ -83,7 +116,6 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
       fileInputRef.current?.click();
    };
 
-   // --- FINAL FORM SUBMISSION ---
    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isSubmitting || isUploading || totalImages === 0) return;
@@ -94,14 +126,32 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
       const form = event.currentTarget;
       const formValues = new FormData(form);
       
+      const attributes: { [key: string]: string | number } = {};
+      const attributeRegex = /attributes\[(.*?)\]/;
+      for (const [key, value] of formValues.entries()) {
+         const match = key.match(attributeRegex);
+         if (match && value) {
+            const attrName = match[1];
+             if (attrName === "game_id") {
+               attributes[attrName] = value as string;
+            } else {
+               const numValue = parseFloat(value as string);
+               if (!isNaN(numValue)) {
+                  attributes[attrName] = numValue;
+               }
+            }
+         }
+      }
+
       const payload = {
          productId: product.id,
          initData: webApp?.initData || "",
          title: formValues.get("title") as string,
          price: formValues.get("price") as string,
          description: formValues.get("description") as string,
-         keptImages: existingImages, // Images that were not removed
-         newTempImageUrls: newTempImageUrls, // Freshly uploaded images
+         keptImages: existingImages, 
+         newTempImageUrls: newTempImageUrls,
+         attributes, // Include attributes in the payload
       };
 
       try {
@@ -121,18 +171,48 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
          }
       } catch (error) {
          console.log(error);
-         
          toast.error(t("network_error"));
       } finally {
          setIsSubmitting(false);
       }
    };
+   
+   const renderDynamicFields = () => {
+      if (!product.category?.name) return null;
+
+      switch (product.category.name) {
+         case 'PUBG Accounts':
+            const pubgAttributes: Attributes = typeof product.attributes === 'string'
+                ? JSON.parse(product.attributes)
+                : product.attributes as Attributes;
+            return <PubgAccountFields attributes={pubgAttributes} />;
+         case 'Telegram NFT Gifts':
+             const telegramAttributes: Attributes = typeof product.attributes === 'string'
+                ? JSON.parse(product.attributes)
+                : product.attributes as Attributes;
+            return <TelegramNftGiftFields attributes={telegramAttributes} />;
+         default:
+            return null;
+      }
+   }
 
    return (
       <div className="w-full max-w-md mx-auto">
          <form onSubmit={handleSubmit}>
             <FieldGroup>
-               {/* Form Fields (with defaultValues) */}
+                 <FieldSet>
+                    <FieldGroup>
+                        <Field>
+                            <FieldLabel>{t("main_category")}</FieldLabel>
+                            <Input value={parentCategoryName} disabled />
+                        </Field>
+                        <Field>
+                           <FieldLabel>{t("sub_category")}</FieldLabel>
+                           <Input value={product.category.name} disabled />
+                        </Field>
+                    </FieldGroup>
+                </FieldSet>
+
                  <FieldSet>
                   <FieldLegend>{t("product_information")}</FieldLegend>
                   <FieldDescription>{t("edit_account_information")}</FieldDescription>
@@ -146,19 +226,18 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
                   </Field>
                </FieldSet>
 
-               {/* --- REFACTORED IMAGE UPLOAD AREA --- */}
+                {renderDynamicFields()}
+
                <FieldSet>
                   <div className="bg-popover rounded-lg border-dashed border-2 grid py-2 cursor-pointer min-h-[200px]" onClick={handleUploadClick}>
                      {totalImages > 0 ? (
                         <div className="grid grid-cols-3 gap-2 px-2">
-                           {/* Render existing images */}
                            {existingImages.map((url, index) => (
                               <div key={url + index} className="relative aspect-square">
                                  <Image src={url} alt={t("previous_image")} className="w-full h-full object-cover rounded-md" fill sizes="33vw" />
                                  <button type="button" onClick={(e) => { e.stopPropagation(); removeExistingImage(url); }} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 z-10"><X size={12} /></button>
                               </div>
                            ))}
-                           {/* Render new temp images */}
                            {newTempImageUrls.map((url) => (
                               <div key={url} className="relative aspect-square">
                                  <Image src={url} alt={t("new_image")} className="w-full h-full object-cover rounded-md" fill sizes="33vw" />
@@ -183,7 +262,6 @@ export default function EditProductForm({ product, onSuccess }: EditProductFormP
                   </div>
                </FieldSet>
 
-               {/* Description Field (with defaultValue) */}
                <FieldSet>
                   <Field>
                      <FieldLabel htmlFor="description">{t("detailed_description")}</FieldLabel>

@@ -18,20 +18,19 @@ export async function GET(request: Request) {
          skip: skip,
          take: take,
          orderBy: { createdAt: "desc" },
-         // ... (select kısmı aynı kalabilir)
+         include: {
+            editHistory: {
+               orderBy: {
+                  changedAt: "desc",
+               },
+               take: 1,
+            },
+         },
       });
-
-      // Toplam ürün sayısını da çekmek iyi bir pratiktir (Önerilir!)
-      // const totalCount = await prisma.product.count({
-      //    where: { isPublished: true },
-      // });
 
       return NextResponse.json(
          {
             products: products,
-            // totalProducts: totalCount, // Sayfalama için gerekli
-            // currentPage: page,
-            // totalPages: Math.ceil(totalCount / take),
          },
          { status: 200 }
       );

@@ -18,6 +18,14 @@ export async function getProducts({
          skip: skip,
          take: limit,
          orderBy: { createdAt: "desc" },
+         include: {
+            editHistory: {
+               orderBy: {
+                  changedAt: "desc",
+               },
+               take: 1,
+            },
+         },
       });
       return products;
    } catch (error) {

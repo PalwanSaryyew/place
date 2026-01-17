@@ -6,16 +6,16 @@ import ProductCard from "./ProductCard";
 import { INITIAL_LIMIT } from "@/lib/settings";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { Product } from "@/generated/prisma/client";
+import { ProductWithHistory } from "@/lib/types";
 
 // Types expected by the API
 interface ProductData {
-   products: Product[];
+   products: ProductWithHistory[];
 }
 
 // Receives initial data and API URL from the server component.
 interface InfiniteProductListProps {
-   initialProducts: Product[];
+   initialProducts: ProductWithHistory[];
    apiUrl: string;
 }
 
@@ -26,7 +26,7 @@ export default function InfiniteProductList({
    apiUrl,
 }: InfiniteProductListProps) {
    const t = useTranslations("infiniteProductList");
-   const [products, setProducts] = useState<Product[]>(initialProducts);
+   const [products, setProducts] = useState<ProductWithHistory[]>(initialProducts);
    const [page, setPage] = useState(2); // Initially page is 1 loaded, next page is 2
    const [hasMore, setHasMore] = useState(
       initialProducts.length === PRODUCTS_PER_PAGE
@@ -122,6 +122,7 @@ export default function InfiniteProductList({
                   price={product.price}
                   imageUrls={product.images}
                   attributes={product.attributes}
+                  editHistory={product.editHistory}
                />
             ))}
          </div>

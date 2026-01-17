@@ -5,6 +5,7 @@ import { constants } from "fs";
 import path from "path";
 import { getUserDataFromInitData, validateTelegramInitData } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "../../../../shared/generated/prisma/client";
 
 export const maxDuration = 3000;
 
@@ -19,7 +20,8 @@ export async function POST(request: NextRequest) {
          price: priceString, 
          description, 
          keptImages, 
-         newTempImageUrls 
+         newTempImageUrls,
+         attributes // <<< Destructure attributes
       } = body;
 
       // --- 2. Authentication and Authorization ---
@@ -48,18 +50,21 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "At least one image is required." }, { status: 400 });
       }
 
-      // --- 4. Fetch Product and Authorize ---
-      const product = await prisma.product.findUnique({ where: { id: productId } });
-      if (!product) {
+      // --- 4. Fetch Original Product (before transaction) ---
+      const originalProduct = await prisma.product.findUnique({ where: { id: productId } });
+      if (!originalProduct) {
          return NextResponse.json({ error: "Product not found." }, { status: 404 });
       }
-      if (product.userId !== userData.id.toString()) {
+      if (originalProduct.userId !== userData.id.toString()) {
          return NextResponse.json({ error: "Unauthorized." }, { status: 403 });
       }
-
-      // --- 5. Handle Image Deletions ---
+      
+      // --- 5. Handle Image File Operations (outside transaction) ---
       const uploadDir = path.join(process.cwd(), "uploads");
-      const imagesToDelete = product.images.filter(imgUrl => !keptImages.includes(imgUrl));
+      const tempDir = path.join(process.cwd(), "temp");
+
+      // Deletions
+      const imagesToDelete = originalProduct.images.filter(imgUrl => !keptImages.includes(imgUrl));
       for (const imageUrl of imagesToDelete) {
          const filename = path.basename(imageUrl);
          const filepath = path.join(uploadDir, filename);
@@ -70,15 +75,13 @@ export async function POST(request: NextRequest) {
          }
       }
 
-      // --- 6. Handle New Images (Move from temp) ---
+      // Additions (move from temp)
       const newFinalImagePaths: string[] = [];
-      const tempDir = path.join(process.cwd(), "temp");
       try {
          await access(uploadDir, constants.F_OK);
       } catch {
          await mkdir(uploadDir, { recursive: true });
       }
-
       for (const tempUrl of newTempImageUrls) {
           const filename = path.basename(tempUrl);
           const tempFilePath = path.join(tempDir, filename);
@@ -90,16 +93,60 @@ export async function POST(request: NextRequest) {
               console.warn(`Could not move file: ${filename}`, error);
           }
       }
-
       const finalImagePaths = [...keptImages, ...newFinalImagePaths];
 
-      // --- 7. Update Database ---
-      const updatedProduct = await prisma.product.update({
-         where: { id: productId },
-         data: { title, description, price, images: finalImagePaths },
+      // --- 6. Update Database within a Transaction ---
+      const updatedProduct = await prisma.$transaction(async (tx) => {
+        // Step 6a: Update the product
+        const productUpdate = await tx.product.update({
+           where: { id: productId },
+           data: { 
+               title, 
+               description, 
+               price, 
+               images: finalImagePaths,
+               attributes: attributes || originalProduct.attributes // <<< Update attributes
+            },
+        });
+
+        // Step 6b: Compare and create edit history
+        const oldData: Prisma.JsonValue = {};
+        const newData: Prisma.JsonValue = {};
+
+        if (originalProduct.title !== title) {
+            oldData.title = originalProduct.title;
+            newData.title = title;
+        }
+        if (originalProduct.description !== description) {
+            oldData.description = originalProduct.description;
+            newData.description = description;
+        }
+        if (originalProduct.price !== price) {
+            oldData.price = originalProduct.price;
+            newData.price = price;
+        }
+        // <<< Compare attributes
+        if (JSON.stringify(originalProduct.attributes) !== JSON.stringify(attributes)) {
+            oldData.attributes = originalProduct.attributes;
+            newData.attributes = attributes;
+        }
+
+        // Only create a history record if something actually changed
+        if (Object.keys(oldData).length > 0) {
+            await tx.productEditHistory.create({
+                data: {
+                    productId: productId,
+                    oldValues: oldData,
+                    newValues: newData,
+                }
+            });
+        }
+
+        return productUpdate;
       });
 
-      // --- 8. Return Success Response ---
+
+      // --- 7. Return Success Response ---
       return NextResponse.json({
          message: "Product updated successfully!",
          product: updatedProduct,
@@ -107,6 +154,10 @@ export async function POST(request: NextRequest) {
 
    } catch (error) {
       console.error("Update product error:", error);
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        // Handle transaction errors
+        return NextResponse.json({ error: "Database transaction failed." }, { status: 500 });
+      }
       return NextResponse.json({ error: "Server error during product update." }, { status: 500 });
    }
 }

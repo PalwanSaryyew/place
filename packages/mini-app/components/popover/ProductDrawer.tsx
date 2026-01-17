@@ -24,6 +24,8 @@ import { MessageCircle, PanelBottomClose, Send } from "lucide-react";
 import { GiBuyCard } from "react-icons/gi";
 import { useTranslations } from "next-intl";
 import { JsonValue } from "@/generated/prisma/internal/prismaNamespace";
+import { ProductEditHistory } from "../../../shared/generated/prisma/client";
+
 
 // TWA Tip Tanımlamaları (shareMessage özelliğini ekliyoruz)
 const isTwaAvailable = (
@@ -40,6 +42,13 @@ const isTwaAvailable = (
    );
 };
 
+// Extend ProductCardProps for the drawer
+interface ProductDrawerProps extends ProductCardProps {
+   children: React.ReactNode;
+   editHistory?: ProductEditHistory[];
+}
+
+
 export function ProductDrawer({
    children,
    id,
@@ -48,9 +57,8 @@ export function ProductDrawer({
    price,
    imageUrls,
    attributes,
-}: ProductCardProps & {
-   children: React.ReactNode;
-}) {
+   editHistory,
+}: ProductDrawerProps) {
    const [webApp, setWebApp] = React.useState<WebApp | undefined>();
    const [isLoading, setIsLoading] = React.useState(false);
    const [isSharing, setIsSharing] = React.useState(false);
@@ -212,27 +220,38 @@ export function ProductDrawer({
       );
    };
 
-   const DrawerRealContent = () => (
-      <div className="flex-1 overflow-y-auto px-4">
-         <div className="flex justify-center pt-4">
-            <ProductPhotosCarousel imageUrls={imageUrls} />
-         </div>
-         <DrawerHeader className="px-0 mt-4 text-left">
-            <DrawerTitle className="text-2xl font-bold text-left">
-               {name}
-            </DrawerTitle>
-            <div className="text-left mt-2">
-               <Badge variant={"secondary"} className="text-sm">
-                  {price} {t("currency")}
-               </Badge>
+   const DrawerRealContent = () => {
+      const lastEdit = editHistory && editHistory.length > 0 ? editHistory[0] : null;
+
+      return (
+         <div className="flex-1 overflow-y-auto px-4">
+            <div className="flex justify-center pt-4">
+               <ProductPhotosCarousel imageUrls={imageUrls} />
             </div>
-            <DrawerDescription className="mt-2 text-base text-left leading-relaxed whitespace-pre-wrap">
-               {description}
-            </DrawerDescription>
-            <AttributesSection attributes={attributes} />
-         </DrawerHeader>
-      </div>
-   );
+            <DrawerHeader className="px-0 mt-4 text-left">
+               <DrawerTitle className="text-2xl font-bold text-left">
+                  {name}
+               </DrawerTitle>
+               <div className="text-left mt-2">
+                  <Badge variant={"secondary"} className="text-sm">
+                     {price} {t("currency")}
+                  </Badge>
+               </div>
+               <DrawerDescription className="mt-2 text-base text-left leading-relaxed whitespace-pre-wrap">
+                  {description}
+               </DrawerDescription>
+               <AttributesSection attributes={attributes} />
+               {lastEdit && (
+                  <div className="mt-4 pt-4 border-t text-left">
+                     <p className="text-xs text-muted-foreground italic">
+                        {t("last_updated", { date: new Date(lastEdit.changedAt).toLocaleDateString() })}
+                     </p>
+                  </div>
+               )}
+            </DrawerHeader>
+         </div>
+      );
+   };
 
    return (
       <>

@@ -12,11 +12,15 @@ import {
 } from "@/components/ui/drawer";
 import EditProductForm from "@/components/forms/EditProductForm";
 import { Edit } from "lucide-react";
-import { Product } from "@/generated/prisma/client";
+import { Product, Category } from "@/generated/prisma/client";
 import { useTranslations } from "next-intl";
 
+type ProductWithCategory = Product & {
+   category: Category;
+};
+
 interface EditProductProps {
-    product: Product;
+    product: ProductWithCategory;
     disabled?: boolean;
 }
 

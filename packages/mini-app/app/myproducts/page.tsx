@@ -9,13 +9,18 @@ import { Loader2, AlertTriangle } from "lucide-react";
 import { MyProductCard } from "@/components/product/my-product-card";
 
 // Ürün tipi (Prisma modelinize göre ayarlayın)
-import { Product } from "@/generated/prisma/client";
+import { Product, Category } from "@/generated/prisma/client";
+
+// Define a new type that includes the category relation
+type ProductWithCategory = Product & {
+   category: Category;
+};
 
 export default function MyProductsPage() {
    const t = useTranslations("myProductsPage");
    // Güncellenmiş context'ten hem webApp hem de initData'yı al
    const { initData } = useWebApp();
-   const [products, setProducts] = useState<Product[]>([]);
+   const [products, setProducts] = useState<ProductWithCategory[]>([]);
    // isLoading başlangıçta false olabilir, çünkü initData'nın gelmesini bekleyeceğiz
    const [isLoading, setIsLoading] = useState(true);
    const [error, setError] = useState<string | null>(null);

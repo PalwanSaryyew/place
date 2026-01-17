@@ -10,6 +10,7 @@ const Attribute = ({
    attribute,
    placeholder,
    type = "number",
+   defaultValue,
 }: {
    visible: boolean;
    visibleFields: { [key: string]: boolean };
@@ -17,6 +18,7 @@ const Attribute = ({
    attribute: string;
    placeholder?: string;
    type?: string;
+   defaultValue?: string | number;
 }) => {
    const t = useTranslations("attributes.pubg_account");
 
@@ -42,6 +44,7 @@ const Attribute = ({
                   name={`attributes[${attribute}]`}
                   type={type}
                   placeholder={placeholder || "e.g., 123456789"}
+                  defaultValue={defaultValue}
                />
             </Field>
          )}

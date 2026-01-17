@@ -34,7 +34,7 @@ import { ProductDrawer } from "../popover/ProductDrawer";
 import { CommentsDrawer } from "../popover/CommentsDrawer"; // CommentsDrawer'ı içe aktar
 import { cn } from "@/lib/utils";
 import { EditProduct } from "./EditProduct";
-import { Product } from "@/generated/prisma/client";
+import { Product, Category } from "@/generated/prisma/client";
 
 // ... (other code) ...
 
@@ -69,8 +69,11 @@ function CommentsDrawerTrigger({
    );
 }
 
+type ProductWithCategory = Product & {
+   category: Category;
+};
 interface MyProductCardProps {
-   product: Product;
+   product: ProductWithCategory;
 }
 
 export function MyProductCard({ product }: MyProductCardProps) {
