@@ -11,10 +11,22 @@ import { MyProductCard } from "@/components/product/my-product-card";
 // Ürün tipi (Prisma modelinize göre ayarlayın)
 import { Product, Category } from "@/generated/prisma/client";
 
+// Manually define the type as a workaround
+interface ProductEditHistory {
+  id: number;
+  changedAt: Date;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  oldValues: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  newValues: any;
+  productId: number;
+}
+
 // Define a new type that includes the category relation
 type ProductWithCategory = Product & {
    category: Category;
-};
+   editHistory?: ProductEditHistory[];
+}; 
 
 export default function MyProductsPage() {
    const t = useTranslations("myProductsPage");

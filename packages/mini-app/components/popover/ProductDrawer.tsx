@@ -244,7 +244,7 @@ export function ProductDrawer({
                {lastEdit && (
                   <div className="mt-4 pt-4 border-t text-left">
                      <p className="text-xs text-muted-foreground italic">
-                        {t("last_updated", { date: new Date(lastEdit.changedAt).toLocaleDateString() })}
+                        {t("last_updated", { date: new Date(lastEdit.changedAt) })}
                      </p>
                   </div>
                )}

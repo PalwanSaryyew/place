@@ -15,7 +15,8 @@
       "message_shared_successfully": "Сообщение успешно отправлено!",
       "message_id_not_found": "Идентификатор сообщения не найден",
       "share_error": "Ошибка общего доступа:",
-      "currency": "USDT"
+      "currency": "USDT",
+      "last_updated": "Последнее обновление {date, date, short}"
    },
    "languageDialog": {
       "title": "Выберите язык",

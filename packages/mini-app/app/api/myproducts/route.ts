@@ -79,6 +79,12 @@ export async function POST(request: NextRequest) {
          where: { userId: user.id },
          include: {
             category: true, // Fetch related category data
+            editHistory: {
+               orderBy: {
+                  changedAt: 'desc',
+               },
+               take: 1,
+            }
          },
          orderBy: { createdAt: "desc" },
       }), DATABASE_TIMEOUT);

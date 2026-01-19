@@ -14,8 +14,8 @@
       "api_error": "API ýalňyşlygy",
       "message_shared_successfully": "Habar üstünlikli paýlaşyldy!",
       "message_id_not_found": "Habar ID tapylmady",
-      "share_error": "Paýlaşma ýalňyşlygy:",
-      "currency": "USDT"
+      "currency": "USDT",
+      "last_updated": "Soňky täzelenme {date, date, short}"
    },
    "languageDialog": {
       "title": "Dil saýlaň",

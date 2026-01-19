@@ -14,8 +14,8 @@
       "api_error": "API Hatası",
       "message_shared_successfully": "Mesaj başarıyla paylaşıldı!",
       "message_id_not_found": "Mesaj ID'si bulunamadı",
-      "share_error": "Paylaşım hatası:",
-      "currency": "USDT"
+      "currency": "USDT",
+      "last_updated": "Son güncellenme {date, date, short}"
    },
    "languageDialog": {
       "title": "Dil Seçin",

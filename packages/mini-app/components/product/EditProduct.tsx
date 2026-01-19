@@ -15,8 +15,20 @@ import { Edit } from "lucide-react";
 import { Product, Category } from "@/generated/prisma/client";
 import { useTranslations } from "next-intl";
 
+// Manually define the type as a workaround
+interface ProductEditHistory {
+  id: number;
+  changedAt: Date;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  oldValues: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  newValues: any;
+  productId: number;
+}
+
 type ProductWithCategory = Product & {
    category: Category;
+   editHistory?: ProductEditHistory[];
 };
 
 interface EditProductProps {

@@ -38,6 +38,17 @@ import { Product, Category } from "@/generated/prisma/client";
 
 // ... (other code) ...
 
+// Manually define the type as a workaround
+interface ProductEditHistory {
+  id: number;
+  changedAt: Date;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  oldValues: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  newValues: any;
+  productId: number;
+}
+
 // CommentsDrawer'ı tetikleyecek ve yönetecek yeni bileşen
 function CommentsDrawerTrigger({
    children,
@@ -71,6 +82,7 @@ function CommentsDrawerTrigger({
 
 type ProductWithCategory = Product & {
    category: Category;
+   editHistory?: ProductEditHistory[];
 };
 interface MyProductCardProps {
    product: ProductWithCategory;
@@ -181,6 +193,11 @@ export function MyProductCard({ product }: MyProductCardProps) {
                <h3 className="font-semibold text-lg line-clamp-1">
                   {product.title}
                </h3>
+               {product.editHistory && product.editHistory.length > 0 && (
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">
+                     {t('updated')}: {new Date(product.editHistory[0].changedAt).toLocaleDateString()}
+                  </span>
+               )}
             </div>
             <p className="text-sm text-muted-foreground">{product.price} {t("currency")}</p>
          </CardHeader>
